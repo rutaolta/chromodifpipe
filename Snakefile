@@ -84,13 +84,17 @@ rule scaffold_length:
         expand(samples_dir_path / "{sample}.fasta", sample=SAMPLES)
     output:
         expand(reports_dir_path / "{sample}.txt", sample=SAMPLES)
+    params:
+        boundary=config["boundary"]
     shell:
-        "python workflow/scripts/seq_report.py -i {input} -o {output} -b 60000 -t report 2>&1"
+        "python workflow/scripts/seq_report.py -i {input} -o {output} -b {params.boundary} -t report 2>&1"
 
 rule generate_whitelists:
     input:
         expand(samples_dir_path / "{sample}.fasta", sample=SAMPLES)
     output:
         expand(whitelists_dir_path / "{sample}.whitelist.txt", sample=SAMPLES)
+    params:
+        boundary=config["boundary"]
     shell:
-        "python workflow/scripts/seq_report.py -i {input} -o {output} -b 60000 -t whitelist 2>&1"
+        "python workflow/scripts/seq_report.py -i {input} -o {output} -b {params.boundary} -t whitelist 2>&1"

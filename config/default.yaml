@@ -30,6 +30,9 @@ reference: "drosophila_melanogaster"
 sample: "drosophila_ananassae"
 species: "Saccharomyces cerevisiae"
 
+#---- Boundary for scaffold length ----
+boundary: 60000
+
 #---- Threads ----
 split_fasta_threads: 1
 trf_threads: 8
