@@ -1,0 +1,1 @@
+Here would be generated reports which contain detailed information about scaffolds for each sample

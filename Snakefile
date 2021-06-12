@@ -14,6 +14,7 @@ reference_dir_path = Path(config["reference_dir"])
 samples_dir_path = Path(config["samples_dir"])
 samples_splitted_dir_path = Path(config["samples_splitted_dir"])
 whitelists_dir_path = Path(config["whitelists_dir"])
+reports_dir_path = Path(config["reports_dir"])
 
 out_trf_dir_path = Path(config["out_trf_dir"])
 out_wm_dir_path = Path(config["out_wm_dir"])
@@ -82,7 +83,7 @@ rule scaffold_length:
     input:
         expand(samples_dir_path / "{sample}.fasta", sample=SAMPLES)
     output:
-        expand(samples_dir_path / "{sample}.txt", sample=SAMPLES)
+        expand(reports_dir_path / "{sample}.txt", sample=SAMPLES)
     shell:
         "python workflow/scripts/seq_report.py -i {input} -o {output} -b 60000 -t report 2>&1"
 

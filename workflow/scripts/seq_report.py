@@ -26,32 +26,36 @@ def median(data):
         return (data[i - 1] + data[i])/2
 
 
-def split_fasta(input, output, boundary=60000):
-    file = open(input).read()
+def get_scaffold_info(inputpaths, outputpaths, boundary, outputtype='whitelist'):
+    res = {}
+    for input, output in zip(inputpaths, outputpaths):
+        file = open(input).read()
 
-    seq_iter = map(lambda seq: seq.split("\n", 1), file.split(">"))
-    next(seq_iter)
+        seq_iter = map(lambda seq: seq.split("\n", 1), file.split(">"))
+        next(seq_iter)
 
-    lens = []
+        lens = []
 
-    while True:
-        try:
-            seq = next(seq_iter)
-            scaffold_row = seq[0].split(" ", 1)
-            ori_scaffold = scaffold_row[0]
-            scaffold = ori_scaffold.replace(".", "")
-            details = scaffold_row[1]
-            scaffold_len = len(seq[1])
-            lens.append(scaffold_len)
-            with open(output, 'a') as f:
-                if scaffold_len >= boundary:
-                    if outfiletype == "whitelist":
-                        f.write(f'{scaffold}\n')
-                    else:
-                        f.write(f'{ori_scaffold}\t{scaffold}\t{scaffold_len}\t{details}\n')
-        except StopIteration:
-            break
-    return f'{output}\n\tmean:{int(mean(lens))}, median:{median(lens)}, max:{max(lens)}, min:{min(lens)}'
+        while True:
+            try:
+                seq = next(seq_iter)
+                scaffold_row = seq[0].split(" ", 1)
+                ori_scaffold = scaffold_row[0]
+                scaffold = ori_scaffold.replace(".", "")
+                details = scaffold_row[1]
+                scaffold_len = len(seq[1])
+                lens.append(scaffold_len)
+                with open(output, 'a') as f:
+                    if scaffold_len >= boundary:
+                        if outputtype == "whitelist":
+                            f.write(f'{scaffold}\n')
+                        else:
+                            f.write(f'{ori_scaffold}\t{scaffold}\t{scaffold_len}\t{details}\n')
+            except StopIteration:
+                break
+        res[output] = f'mean:{int(mean(lens))}, median:{median(lens)}, max:{max(lens)}, min:{min(lens)}'
+    sys.stdout.write('Files are generated!\n\n' + '\n'.join(f'{k}\n\t{v}' for (k, v) in res.items()) + '\n\n')
+    return
 
 
 # logging
@@ -59,17 +63,17 @@ def split_fasta(input, output, boundary=60000):
 
 # parsing args
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input", required=True, help="Sample file .fasta")
-parser.add_argument("-o", "--output", required=True, help="Report file .txt")
+parser.add_argument("-i", "--input",  nargs='+', required=True, help="Sample file .fasta")
+parser.add_argument("-o", "--output",  nargs='+', required=True, help="Report file .txt")
 parser.add_argument("-t", "--type", required=True, help="The type of output: report, whitelist")
-parser.add_argument("-b", "--boundary", required=False, help="Constructing whitelist of scaffolds, default boundary = 60 000")
+parser.add_argument("-b", "--boundary", required=False, default=60000, help="Constructing whitelist of scaffolds, default boundary = 60 000")
 
 args = parser.parse_args()
 
 infilepath = args.input
 outfilepath = args.output
 outfiletype = args.type
-boundary = args.boundary
+boundary = int(args.boundary)
 
 # call function for writing scaffold length report
-split_fasta(infilepath, outfilepath, boundary, outfiletype)
+get_scaffold_info(infilepath, outfilepath, boundary, outfiletype)

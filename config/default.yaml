@@ -2,6 +2,7 @@
 reference_dir: "data_input/reference"
 samples_dir: "data_input/samples"
 whitelists_dir: "data_input/whitelists"
+reports_dir: "data_input/reports"
 
 samples_splitted_dir: "data_output/splitted"
 
