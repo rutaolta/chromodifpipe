@@ -1,0 +1,78 @@
+#---- Dirs ----
+reference_dir: "data_input/reference"
+samples_dir: "data_input/samples"
+whitelists_dir: "data_input/whitelists"
+
+samples_splitted_dir: "data_output/splitted"
+
+out_trf_dir: "data_output/trf"
+out_wm_dir: "data_output/windowmasker"
+out_rm_dir: "data_output/repeatmasker"
+
+out_gff_trf_dir: "data_output/gff/trf"
+out_gff_wm_dir: "data_output/gff/windowmasker"
+out_gff_rm_dir: "data_output/gff/repeatmasker"
+out_gff_merged_dir: "data_output/gff/merged"
+out_bedtools_dir: "data_output/bedtools"
+out_lastdbal_dir: "data_output/lastdbal"
+out_mavr_dir: "data_output/mavr"
+
+scripts_dir: "workflow/scripts"
+
+log_dir: "logs"
+cluster_log_dir: "cluster_logs"
+
+conda_config: "workflow/envs/conda.yaml"
+
+#---- Species ----
+reference: "drosophila_melanogaster"
+sample: "drosophila_ananassae"
+species: "Saccharomyces cerevisiae"
+
+#---- Threads ----
+split_fasta_threads: 1
+trf_threads: 8
+trf_gff_threads: 1
+merge_gff_threads: 1
+repeatmasker_threads: 8
+wm_counts_threads: 8
+wm_windowmasker_threads: 8
+wm_gff_threads: 1
+bedtools_sort_threads: 8
+bedtools_threads: 8
+lastdb_threads: 8
+lastal_threads: 8
+last_tar_threads: 1
+plot_last_tab_threads: 1
+
+#---- Time ----
+split_fasta_time: "00:10:00"
+trf_time: "00:30:00"
+trf_gff_time: "00:10:00"
+merge_gff_time: "00:05:00"
+repeatmasker_time: "00:30:00"
+wm_counts_time: "00:30:00"
+wm_windowmasker_time: "00:30:00"
+wm_gff_time: "00:10:00"
+bedtools_sort_time: "00:10:00"
+bedtools_time: "00:30:00"
+lastdb_time: "00:30:00"
+lastal_time: "00:30:00"
+last_tar_time: "00:05:00"
+plot_last_tab_time: "00:05:00"
+
+#---- Memory ----
+split_fasta_mem_mb: 100
+trf_mem_mb: 1000
+trf_gff_mem_mb: 100
+merge_gff_mem_mb: 100
+repeatmasker_mem_mb: 1000
+wm_counts_mem_mb: 1000
+wm_windowmasker_mem_mb: 1000
+wm_gff_mem_mb: 100
+bedtools_sort_mem_mb: 1000
+bedtools_mem_mb: 1000
+lastdb_mem_mb: 1000
+lastal_mem_mb: 1000
+last_tar_mem_mb: 1000
+plot_last_tab_mem_mb: 1000

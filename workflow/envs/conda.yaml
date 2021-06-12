@@ -1,0 +1,14 @@
+#---- Bioconda config ----
+name: chromodifpipe
+channels:
+  - mahajrod
+  - conda-forge
+  - bioconda
+dependencies:
+  - snakemake-minimal>=6.1.0
+  - python=3.8
+  - trf=4.09.1
+  - samtools=1.10
+  - bedtools=2.30.0
+  - last=1238
+  - repeatmasker>=4.1.2.p1
