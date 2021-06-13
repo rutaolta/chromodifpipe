@@ -31,52 +31,52 @@ sample: "drosophila_ananassae"
 species: "Saccharomyces cerevisiae"
 
 #---- Boundary for scaffold length ----
-boundary: 60000
+boundary: 1000000
 
 #---- Threads ----
 split_fasta_threads: 1
-trf_threads: 8
+trf_threads: 16
 trf_gff_threads: 1
 merge_gff_threads: 1
-repeatmasker_threads: 8
+repeatmasker_threads: 7
 wm_counts_threads: 8
 wm_windowmasker_threads: 8
 wm_gff_threads: 1
 bedtools_sort_threads: 8
 bedtools_threads: 8
-lastdb_threads: 8
-lastal_threads: 8
-last_tar_threads: 1
+lastdb_threads: 16
+lastal_threads: 16
+last_tar_threads: 4
 plot_last_tab_threads: 1
 
 #---- Time ----
 split_fasta_time: "00:10:00"
-trf_time: "00:30:00"
+trf_time: "04:00:00"
 trf_gff_time: "00:10:00"
-merge_gff_time: "00:05:00"
-repeatmasker_time: "00:30:00"
-wm_counts_time: "00:30:00"
-wm_windowmasker_time: "00:30:00"
+merge_gff_time: "00:10:00"
+repeatmasker_time: "24:00:00"
+wm_counts_time: "04:00:00"
+wm_windowmasker_time: "04:00:00"
 wm_gff_time: "00:10:00"
-bedtools_sort_time: "00:10:00"
-bedtools_time: "00:30:00"
-lastdb_time: "00:30:00"
-lastal_time: "00:30:00"
-last_tar_time: "00:05:00"
-plot_last_tab_time: "00:05:00"
+bedtools_sort_time: "01:00:00"
+bedtools_time: "01:00:00"
+lastdb_time: "10:00:00"
+lastal_time: "10:00:00"
+last_tar_time: "00:30:00"
+plot_last_tab_time: "02:00:00"
 
 #---- Memory ----
-split_fasta_mem_mb: 100
-trf_mem_mb: 1000
-trf_gff_mem_mb: 100
-merge_gff_mem_mb: 100
-repeatmasker_mem_mb: 1000
-wm_counts_mem_mb: 1000
-wm_windowmasker_mem_mb: 1000
-wm_gff_mem_mb: 100
-bedtools_sort_mem_mb: 1000
-bedtools_mem_mb: 1000
-lastdb_mem_mb: 1000
-lastal_mem_mb: 1000
+split_fasta_mem_mb: 5000
+trf_mem_mb: 2000
+trf_gff_mem_mb: 3000
+merge_gff_mem_mb: 3000
+repeatmasker_mem_mb: 20000
+wm_counts_mem_mb: 10000
+wm_windowmasker_mem_mb: 10000
+wm_gff_mem_mb: 3000
+bedtools_sort_mem_mb: 5000
+bedtools_mem_mb: 5000
+lastdb_mem_mb: 30000
+lastal_mem_mb: 50000
 last_tar_mem_mb: 1000
 plot_last_tab_mem_mb: 1000
