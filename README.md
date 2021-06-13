@@ -1,8 +1,10 @@
 # About
 
-Pipeline gets samples in fasta format and generates comparison with reference on the chromosome level.
+Pipeline gets samples in fasta format and generates comparison with reference.
 
-The resulting connection between samples and reference you can find on the resulting plot in `data_output` folder.
+Comparison is performed on the chromosome level.
+
+The connection between samples and reference you can find on the resulting plot in `data_output` folder.
 
 # Run
 
