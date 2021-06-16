@@ -56,10 +56,10 @@ rule all:
         # aggregated.gff after identifying and masking repeats with trf, windowmasker, repeatmasker
         expand(
             (
-                out_gff_trf_dir_path / "{sample}.gff"
-                # out_gff_wm_dir_path / "{sample}.gff",
-                # out_gff_rm_dir_path / "{sample}.gff",
-                # out_gff_merged_dir_path / "{sample}.gff"
+                out_gff_trf_dir_path / "{sample}.gff",
+                out_gff_wm_dir_path / "{sample}.gff",
+                out_gff_rm_dir_path / "{sample}.gff",
+                out_gff_merged_dir_path / "{sample}.gff"
             ), sample=SAMPLES
         ),
 
