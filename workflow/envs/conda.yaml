@@ -5,7 +5,6 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - snakemake-minimal>=6.1.0
   - python=3.8
   - trf=4.09.1
   - samtools=1.10

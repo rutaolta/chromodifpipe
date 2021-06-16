@@ -56,12 +56,14 @@ rule all:
         # aggregated.gff after identifying and masking repeats with trf, windowmasker, repeatmasker
         expand(
             (
-                out_gff_trf_dir_path / "{sample}.gff",
-                out_gff_wm_dir_path / "{sample}.gff",
-                out_gff_rm_dir_path / "{sample}.gff",
-                out_gff_merged_dir_path / "{sample}.gff"
+                out_gff_trf_dir_path / "{sample}.gff"
+                # out_gff_wm_dir_path / "{sample}.gff",
+                # out_gff_rm_dir_path / "{sample}.gff",
+                # out_gff_merged_dir_path / "{sample}.gff"
             ), sample=SAMPLES
         ),
+
+        directory(expand(samples_splitted_dir_path / "{sample}", sample=SAMPLES))
 
         # masked fasta
         expand(
@@ -77,7 +79,7 @@ rule all:
         ),
 
         # plot of similar regions by MAVR
-        expand("{sample}.png", sample=SAMPLES)
+        expand({out_mavr_dir_path} / "{sample}.png", sample=SAMPLES)
 
 rule scaffold_length:
     input:

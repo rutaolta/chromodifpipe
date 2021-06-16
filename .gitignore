@@ -8,6 +8,8 @@ __pycache__/
 
 # Results directory
 data_output/
+data_input/reports/
+data_input/whitelists/
 
 # Input files
 *.fasta

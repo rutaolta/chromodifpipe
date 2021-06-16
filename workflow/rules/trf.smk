@@ -20,14 +20,13 @@ checkpoint split_fasta:
     threads:
         config["split_fasta_threads"]
     shell:
-        "python workflow/scripts/split_fasta.py -i {input} -o {output} 2>&1"
+        "python workflow/scripts/split_fasta.py -i {input} -o {output} >{log.std} 2>&1"
 
 rule trf:
     input:
         samples_splitted_dir_path / "{sample}/{scaffold}.fasta"
     output:
         out_trf_dir_path / "{sample}/{scaffold}.dat"
-        # out_trf_dir_path / "{sample}/{scaffold}.fasta.2.7.7.80.10.50.2000.dat"
     log:
         std=log_dir_path / "{sample}/{scaffold}.trf.log",
         cluster_log=cluster_log_dir_path / "{sample}/{scaffold}.trf.cluster.log",

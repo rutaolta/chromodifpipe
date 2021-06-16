@@ -23,7 +23,7 @@ def split_fasta(input, output):
     while True:
         try:
             seq = next(seq_iter)
-            scaffold = (seq[0].split(" ", 1)[0]).replace(".", "")
+            scaffold = seq[0].split(" ", 1)[0]
             filename = f'{output}/{scaffold}.fasta'
             with open(filename, 'a') as f:
                 f.write(f'>{scaffold}\n{seq[1]}')

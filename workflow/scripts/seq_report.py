@@ -40,8 +40,7 @@ def get_scaffold_info(inputpaths, outputpaths, boundary, outputtype='whitelist')
             try:
                 seq = next(seq_iter)
                 scaffold_row = seq[0].split(" ", 1)
-                ori_scaffold = scaffold_row[0]
-                scaffold = ori_scaffold.replace(".", "")
+                scaffold = scaffold_row[0]
                 details = scaffold_row[1]
                 scaffold_len = len(seq[1])
                 lens.append(scaffold_len)
@@ -50,7 +49,7 @@ def get_scaffold_info(inputpaths, outputpaths, boundary, outputtype='whitelist')
                         if outputtype == "whitelist":
                             f.write(f'{scaffold}\n')
                         else:
-                            f.write(f'{ori_scaffold}\t{scaffold}\t{scaffold_len}\t{details}\n')
+                            f.write(f'{scaffold}\t{scaffold_len}\t{details}\n')
             except StopIteration:
                 break
         res[output] = f'mean:{int(mean(lens))}, median:{median(lens)}, max:{max(lens)}, min:{min(lens)}'
