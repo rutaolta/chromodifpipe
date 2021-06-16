@@ -31,7 +31,7 @@ sample: "drosophila_ananassae"
 species: "Saccharomyces cerevisiae"
 
 #---- Boundary for scaffold length ----
-boundary: 60000
+boundary: 1000000
 
 #---- Threads ----
 split_fasta_threads: 1

@@ -29,7 +29,7 @@ def median(data):
 def get_scaffold_info(inputpaths, outputpaths, boundary, outputtype='whitelist'):
     res = {}
     for input, output in zip(inputpaths, outputpaths):
-        file = open(input).read()
+        file = open(input).read() #TODO buffer size 50-100
 
         seq_iter = map(lambda seq: seq.split("\n", 1), file.split(">"))
         next(seq_iter)
