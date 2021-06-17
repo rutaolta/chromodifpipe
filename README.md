@@ -6,6 +6,24 @@ Comparison is performed on the chromosome level.
 
 The connection between samples and reference you can find on the resulting plot in `data_output` folder.
 
+# Configure Pipeline
+
+`git clone https://github.com/rutaolta/chromodifpipe.git`
+
+`cd <pipeline_working_dir>`
+
+It is recommended to create a fresh conda environment using mamba or conda.
+
+```
+mamba env create --name snakemake --file ./environment.yaml
+# or:
+# conda env create --name snakemake --file ./environment.yaml
+```
+
+Activate conda environment with snakemake:
+
+`conda activate chr`
+
 # Run
 
 `snakemake --cores 8 --configfile config/default.yaml --forceall --use-conda --profile profile/slurm/ --printshellcmds --latency-wait 60`

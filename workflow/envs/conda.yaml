@@ -1,11 +1,9 @@
 #---- Bioconda config ----
 name: chromodifpipe
 channels:
-  - mahajrod
   - conda-forge
   - bioconda
 dependencies:
-  - python=3.8
   - trf=4.09.1
   - samtools=1.10
   - bedtools=2.30.0
