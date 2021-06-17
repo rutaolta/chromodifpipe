@@ -22,7 +22,7 @@ mamba env create --name snakemake --file ./environment.yaml
 
 Activate conda environment with snakemake:
 
-`conda activate chr`
+`conda activate snakemake`
 
 # Run
 
