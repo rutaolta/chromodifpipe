@@ -63,8 +63,6 @@ rule all:
             ), sample=SAMPLES
         ),
 
-        directory(expand(samples_splitted_dir_path / "{sample}", sample=SAMPLES))
-
         # masked fasta
         expand(
             out_bedtools_dir_path / "{sample}.fasta", sample=SAMPLES
@@ -100,3 +98,7 @@ rule generate_whitelists:
         boundary=config["boundary"]
     shell:
         "python workflow/scripts/seq_report.py -i {input} -o {output} -b {params.boundary} -t whitelist 2>&1"
+
+rule clean:
+    shell:
+        "rm -rf data_output/trf data_output/splitted data_output/gff .snakemake"

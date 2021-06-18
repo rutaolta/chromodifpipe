@@ -28,7 +28,7 @@ conda_config: "workflow/envs/conda.yaml"
 #---- Species ----
 reference: "drosophila_melanogaster"
 sample: "drosophila_ananassae"
-species: "Saccharomyces cerevisiae"
+species: "Sophophora"
 
 #---- Boundary for scaffold length ----
 boundary: 1000000
