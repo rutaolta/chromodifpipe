@@ -2,7 +2,7 @@ rule rm:
     input:
         samples_dir_path / "{sample}.fasta"
     output:
-        gff=out_gff_rm_dir_path / "{sample}.fasta.out.gff",
+        gff=out_rm_dir_path / "{sample}.fasta.out.gff",
         cat=temp(out_rm_dir_path / "{sample}.fasta.cat.gz"),
         masked=temp(out_rm_dir_path / "{sample}.fasta.masked"),
         out=temp(out_rm_dir_path / "{sample}.fasta.out"),

@@ -22,7 +22,7 @@ mamba env create --name snakemake --file ./environment.yaml
 
 Activate conda environment with snakemake:
 
-`conda activate chr`
+`conda activate snakemake`
 
 # Run
 
@@ -33,7 +33,8 @@ Before running the pipeline you should add whitelist of scaffolds you are intere
 # Scaffold length report
 
 To check scaffold length please use following command. 
-That can be useful for choosing scaffolds for whitelists.  
+That can be useful for choosing scaffolds for whitelists.
+The generated reports will be put in `data_input/reports` folder.
 
 `snakemake -pr --use-conda --cores 1 scaffold_length`
 
@@ -42,5 +43,6 @@ That can be useful for choosing scaffolds for whitelists.
 To generate whitelists of required scaffolds please use following command.
 They will be generated using boundary for each sample.
 Boundaries should be added into `config`.
+The generated whitelists will be put in `data_input/whitelists` folder.
 
 `snakemake -pr --use-conda --cores 1 generate_whitelists`

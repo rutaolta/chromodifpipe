@@ -49,7 +49,7 @@ include: "workflow/rules/lastdbal.smk"
 include: "workflow/rules/plot.smk"
 
 ##### target rules #####
-localrules: all
+localrules: all, scaffold_length, generate_whitelists#, clean
 
 rule all:
     input:
@@ -99,6 +99,6 @@ rule generate_whitelists:
     shell:
         "python workflow/scripts/seq_report.py -i {input} -o {output} -b {params.boundary} -t whitelist 2>&1"
 
-rule clean:
-    shell:
-        "rm -rf data_output/trf data_output/splitted data_output/gff .snakemake"
+# rule clean:
+#     shell:
+#         "rm -rf data_output/trf data_output/splitted data_output/gff .snakemake"
