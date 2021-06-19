@@ -16,7 +16,7 @@ samples_splitted_dir_path = Path(config["samples_splitted_dir"])
 whitelists_dir_path = Path(config["whitelists_dir"])
 reports_dir_path = Path(config["reports_dir"])
 
-out_trf_dir_path = Path(config["out_trf_dir"])
+out_trf_dir_path = Path(config["out_trcluster_log_dir_path / {samplef_dir"])
 out_wm_dir_path = Path(config["out_wm_dir"])
 out_rm_dir_path = Path(config["out_rm_dir"])
 
@@ -24,7 +24,7 @@ out_gff_trf_dir_path = Path(config["out_gff_trf_dir"])
 out_gff_wm_dir_path = Path(config["out_gff_wm_dir"])
 out_gff_rm_dir_path = Path(config["out_gff_rm_dir"])
 out_gff_merged_dir_path = Path(config["out_gff_merged_dir"])
-out_bedtools_dir_path = Path(config["out_bedtools_dir"])
+out_bedtools_dir_path = Path   (config["out_bedtools_dir"])
 out_lastdbal_dir_path = Path(config["out_lastdbal_dir"])
 out_mavr_dir_path = Path(config["out_mavr_dir"])
 
@@ -49,7 +49,8 @@ include: "workflow/rules/lastdbal.smk"
 include: "workflow/rules/plot.smk"
 
 ##### target rules #####
-localrules: all, scaffold_length, generate_whitelists#, clean
+localrules: all, create_sample_cluster_log_dirs, scaffold_length, generate_whitelists#, clean
+ruleorder: create_sample_cluster_log_dirs > split_fasta
 
 rule all:
     input:
@@ -78,6 +79,13 @@ rule all:
 
         # plot of similar regions by MAVR
         expand(out_mavr_dir_path / "{sample}.png", sample=SAMPLES)
+
+rule create_sample_cluster_log_dirs:
+    output:
+        expand(directory(cluster_log_dir_path / "{sample}"), sample=SAMPLES + [config["reference"]])
+    shell:
+        "mkdir -p {output}"
+
 
 rule scaffold_length:
     input:
