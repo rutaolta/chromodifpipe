@@ -8,6 +8,7 @@ rule plot_last_tab:
         png=out_mavr_dir_path /"{sample}"/ "{sample}.png",
         tab=out_mavr_dir_path /"{sample}"/ "{sample}.syn.tab"
     params:
+        output_prefix=out_mavr_dir_path /"{sample}" / "{sample}",
         target_genome_whitelist=whitelists_dir_path / (config["reference"] + ".whitelist.txt")
     log:
         std=log_dir_path / "{sample}.plot_last_tab.log",
@@ -24,6 +25,6 @@ rule plot_last_tab:
     shell:
         "dotplot_from_last_tab.py "
         "-i {input.input_last_tab} "
-        "-o {output.out_dir}/{wildcards.sample} "
+        "-o {params.output_prefix}"
         "-w {params.target_genome_whitelist} "
         "-x {input.query_genome_whitelist} > {log.std} 2>&1"
