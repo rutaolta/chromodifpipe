@@ -92,7 +92,7 @@ rule create_sample_cluster_log_dirs:
 rule create_out_dirs:
     output:
         trf_dirs=directory(expand(out_trf_dir_path / "{sample}", sample=SAMPLES)),
-        mavr_dirs=directory(out_mavr_dir_path)
+        #mavr_dirs=directory(out_mavr_dir_path)
     shell:
         "mkdir -p {output}"
 
