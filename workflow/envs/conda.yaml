@@ -4,6 +4,7 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
+  - pigz
   - trf=4.09.1
   - samtools=1.10
   - bedtools=2.30.0
