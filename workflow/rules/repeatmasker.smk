@@ -30,7 +30,7 @@ rule rm_gff:
         gff=rules.rm.output.gff,
         out=rules.rm.output.out
     output:
-        out_gff_rm_dir_path / "{sample}.gff"
+        gff=out_gff_rm_dir_path / "{sample}.gff"
     log:
         std=log_dir_path / "{sample}.repeatmasker.gzip.log",
         cluster_log=cluster_log_dir_path / "{sample}.repeatmasker.gzip.cluster.log",
@@ -45,8 +45,7 @@ rule rm_gff:
         config["repeatmasker_threads"]
     params:
         species=config["species"],
-        parallel=max([1, int(config["repeatmasker_threads"] / 4)])
     shell:
         "ex -sc '1d3|x' {input.gff} 2>{log.std}; "
-        "mv {input.gff} {output} 2>>{log.std};  "
-        "pigz -p {params.parallel} -c {input.out} > {input.out}.gz 2>>{log.std} "
+        "mv {input.gff} {output.gff} 2>>{log.std};  "
+        "pigz -p {threads} {input.out} 2>>{log.std} "
