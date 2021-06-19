@@ -47,6 +47,6 @@ rule rm_gff:
         species=config["species"],
         parallel=max([1, int(config["repeatmasker_threads"] / 4)])
     shell:
-        "ex -sc '1d3|x' {input.gff}; "
-        "mv {input.gff} {output}; "
-        "pigz -p {params.parallel} -c {input.out} > {input.out}.gz"
+        "ex -sc '1d3|x' {input.gff}; echo $?; "
+        "mv {input.gff} {output}; echo $?;  "
+        "pigz -p {params.parallel} -c {input.out} > {input.out}.gz; echo $? "
