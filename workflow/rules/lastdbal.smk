@@ -14,8 +14,8 @@ rule lastdb:
         std=log_dir_path / "{sample}.lastdb.log",
         cluster_log=cluster_log_dir_path / "{sample}.lastdb.cluster.log",
         cluster_err=cluster_log_dir_path / "{sample}.lastdb.cluster.err"
-#    conda:
-#        "workflow/envs/conda.yaml"
+    conda:
+        "../envs/conda.yaml"
     params:
         prefix="YASS.R11.soft"
     resources:
