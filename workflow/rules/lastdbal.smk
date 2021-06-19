@@ -71,5 +71,5 @@ rule last_tar:
     threads: 
         config["last_tar_threads"]
     shell:
-        "pigz -p {threads} {input.maf} > {log.std} 2>&1"
+        "pigz -p {threads} {input.maf} > {log.std} 2>&1;"
         "pigz -p {threads} {input.tab} > {log.std} 2>&1"
