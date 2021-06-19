@@ -2,7 +2,7 @@ rule plot_last_tab:
     input:
         input_last_tab=out_lastdbal_dir_path / "{sample}.R11.tab.gz",
         query_genome_whitelist=whitelists_dir_path / "{sample}.whitelist.txt",
-        mavr_out_dir=out_mavr_dir_path
+        #mavr_out_dir=out_mavr_dir_path
     output:
         png=out_mavr_dir_path / "{sample}.png",
         tab=out_mavr_dir_path / "{sample}.syn.tab"
