@@ -21,7 +21,7 @@ rule rm:
         config["repeatmasker_threads"]
     params:
         species=config["species"],
-        parallel=int(config["repeatmasker_threads"] / 4)
+        parallel=max([1, int(config["repeatmasker_threads"] / 4)])
     shell:
         "RepeatMasker -species {params.species} -dir {out_rm_dir_path} {input} -parallel {params.parallel} -gff -xsmall >{log.std} 2>&1; "
 
