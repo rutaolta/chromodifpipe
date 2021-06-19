@@ -1,7 +1,7 @@
 import os
 
 ruleorder: split_fasta > create_trf_dirs > trf > trf_gff
-localrules: create_trf_dirs
+
 
 checkpoint split_fasta:
     input:
@@ -22,12 +22,6 @@ checkpoint split_fasta:
         config["split_fasta_threads"]
     shell:
         "python workflow/scripts/split_fasta.py -i {input} -o {output} >{log.std} 2>&1"
-
-rule create_trf_dirs:
-    output:
-        directory(expand(out_trf_dir_path / "{sample}", sample=set(SAMPLES + [config["reference"]])))
-    shell:
-        "mkdir -p {output}"
 
 rule trf:
     input:
