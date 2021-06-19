@@ -82,7 +82,7 @@ rule all:
 
 rule create_sample_cluster_log_dirs:
     output:
-        directory(expand(cluster_log_dir_path / "{sample}", sample=SAMPLES + [config["reference"]]))
+        directory(expand(cluster_log_dir_path / "{sample}", sample=set(SAMPLES + [config["reference"]])))
     shell:
         "mkdir -p {output}"
 
