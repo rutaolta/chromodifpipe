@@ -1,6 +1,6 @@
 import os
 
-ruleorder: split_fasta > create_trf_dirs > trf > trf_gff
+ruleorder: split_fasta > create_out_dirs > trf > trf_gff
 
 
 checkpoint split_fasta:
