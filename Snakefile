@@ -49,14 +49,15 @@ include: "workflow/rules/lastdbal.smk"
 include: "workflow/rules/plot.smk"
 
 ##### target rules #####
-localrules: all, create_sample_cluster_log_dirs, create_trf_dirs, scaffold_length, generate_whitelists#, clean
-ruleorder: create_sample_cluster_log_dirs > split_fasta
+localrules: all, create_sample_cluster_log_dirs, create_out_dirs, scaffold_length, generate_whitelists#, clean
+ruleorder: create_sample_cluster_log_dirs > create_out_dirs > split_fasta
 
 rule all:
     input:
         # aggregated.gff after identifying and masking repeats with trf, windowmasker, repeatmasker
         expand(cluster_log_dir_path / "{sample}", sample=SAMPLES),
         expand(out_trf_dir_path / "{sample}", sample=SAMPLES),
+        out_mavr_dir_path,
         expand(
             (
                 out_gff_trf_dir_path / "{sample}.gff",
@@ -88,9 +89,10 @@ rule create_sample_cluster_log_dirs:
     shell:
         "mkdir -p {output}"
 
-rule create_trf_dirs:
+rule create_out_dirs:
     output:
-        directory(expand(out_trf_dir_path / "{sample}", sample=SAMPLES))
+        trf_dirs=directory(expand(out_trf_dir_path / "{sample}", sample=SAMPLES)),
+        mavr_dirs=out_mavr_dir_path
     shell:
         "mkdir -p {output}"
 
