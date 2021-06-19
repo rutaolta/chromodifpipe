@@ -25,7 +25,7 @@ rule lastdb:
     threads: 
         config["lastdb_threads"]
     shell:
-        "lastdb -c -R11 -P {threads} -u YASS {output.dir}/{wildcards.sample}.{params.prefix} {input} 2>&1"
+        "lastdb -c -R11 -P {threads} -u YASS {output.dir}/{wildcards.sample}.{params.prefix} {input} > {log.std} 2>&1"
 
 rule lastal:
     input:
@@ -49,7 +49,7 @@ rule lastal:
     threads: 
         config["lastal_threads"]
     shell:
-        "lastal -P {threads} -R11 -f MAF -i 4G {params.prefix} {input.lastdb} | tee {output.maf} | maf-convert tab > {output.tab} 2>&1"
+        "lastal -P {threads} -R11 -f MAF -i 4G {params.prefix} {input.lastdb} 2>{log.std} | tee {output.maf} | maf-convert tab > {output.tab} "
 
 rule last_tar:
     input:
@@ -58,6 +58,10 @@ rule last_tar:
     output:
         maf=out_lastdbal_dir_path / "{sample}.R11.maf.gz",
         tab=out_lastdbal_dir_path / "{sample}.R11.tab.gz"
+    log:
+        std=log_dir_path / "{sample}.lastal.gzip.log",
+        cluster_log=cluster_log_dir_path / "{sample}.lastal.gzip.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample}.lastal.gzip.cluster.err"
     conda:
         "../envs/conda.yaml"
     resources:
@@ -67,5 +71,5 @@ rule last_tar:
     threads: 
         config["last_tar_threads"]
     shell:
-        "pigz -c {input.maf} > {output.maf}; "
-        "pigz -c {input.tab} > {output.tab}"
+        "pigz -p {threads} {input.maf} > {log.std} 2>&1"
+        "pigz -p {threads} {input.tab} > {log.std} 2>&1"
