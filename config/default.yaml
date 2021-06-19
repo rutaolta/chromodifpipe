@@ -35,7 +35,7 @@ boundary: 1000000
 
 #---- Threads ----
 split_fasta_threads: 1
-trf_threads: 16
+trf_threads: 1
 trf_gff_threads: 1
 merge_gff_threads: 1
 repeatmasker_threads: 7
