@@ -81,7 +81,7 @@ rule all:
         ),
 
         # plot of similar regions by MAVR
-        expand(out_mavr_dir_path / "{sample}.png", sample=SAMPLES)
+        expand(out_mavr_dir_path / "{sample}" / "{sample}.png", sample=SAMPLES)
 
 rule create_sample_cluster_log_dirs:
     output:
