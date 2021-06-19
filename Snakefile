@@ -16,7 +16,7 @@ samples_splitted_dir_path = Path(config["samples_splitted_dir"])
 whitelists_dir_path = Path(config["whitelists_dir"])
 reports_dir_path = Path(config["reports_dir"])
 
-out_trf_dir_path = Path(config["out_trcluster_log_dir_path / {samplef_dir"])
+out_trf_dir_path = Path(config["out_trf_dir"])
 out_wm_dir_path = Path(config["out_wm_dir"])
 out_rm_dir_path = Path(config["out_rm_dir"])
 
