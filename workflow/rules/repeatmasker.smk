@@ -32,7 +32,7 @@ rule rm_gff:
     output:
         out_gff_rm_dir_path / "{sample}.gff"
     log:
-        std=log_dir_path / "{sample}.repeatmasker.log",
+        std=log_dir_path / "{sample}.repeatmasker.gzip.log",
         cluster_log=cluster_log_dir_path / "{sample}.repeatmasker.cluster.log",
         cluster_err=cluster_log_dir_path / "{sample}.repeatmasker.cluster.err"
     conda:
