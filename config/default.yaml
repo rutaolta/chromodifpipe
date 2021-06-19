@@ -78,4 +78,4 @@ bedtools_mem_mb: 5000
 lastdb_mem_mb: 30000
 lastal_mem_mb: 50000
 last_tar_mem_mb: 1000
-plot_last_tab_mem_mb: 1000
+plot_last_tab_mem_mb: 50000
