@@ -6,7 +6,7 @@ rule rm:
         cat=temp(out_rm_dir_path / "{sample}.fasta.cat.gz"),
         masked=temp(out_rm_dir_path / "{sample}.fasta.masked"),
         out=temp(out_rm_dir_path / "{sample}.fasta.out"),
-        tbl=temp(out_rm_dir_path / "{sample}.fasta.tbl")
+        tbl=out_rm_dir_path / "{sample}.fasta.tbl"
     log:
         std=log_dir_path / "{sample}.repeatmasker.log",
         cluster_log=cluster_log_dir_path / "{sample}.repeatmasker.cluster.log",
@@ -45,8 +45,8 @@ rule rm_gff:
         config["repeatmasker_threads"]
     params:
         species=config["species"],
-        parallel=int(config["repeatmasker_threads"] / 4)
+        parallel=max([1, int(config["repeatmasker_threads"] / 4)])
     shell:
         "ex -sc '1d3|x' {input.gff}; "
         "mv {input.gff} {output}; "
-        "pigz -c {input.out} > {input.out}.gz"
+        "pigz -p {params.parallel} -c {input.out} > {input.out}.gz"
