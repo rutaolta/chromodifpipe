@@ -24,4 +24,4 @@ rule plot_last_tab:
         "-i {input.input_last_tab} "
         "-o {out_mavr_dir_path}/{wildcards.sample} "
         "-w {params.target_genome_whitelist} "
-        "-x {input.query_genome_whitelist} 2>&1"
+        "-x {input.query_genome_whitelist} > {log.std} 2>&1"
