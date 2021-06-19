@@ -57,7 +57,7 @@ rule all:
         # aggregated.gff after identifying and masking repeats with trf, windowmasker, repeatmasker
         expand(cluster_log_dir_path / "{sample}", sample=SAMPLES),
         expand(out_trf_dir_path / "{sample}", sample=SAMPLES),
-        out_mavr_dir_path,
+        #out_mavr_dir_path,
         expand(
             (
                 out_gff_trf_dir_path / "{sample}.gff",
