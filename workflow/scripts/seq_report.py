@@ -53,7 +53,8 @@ def get_scaffold_info(inputpaths, outputpaths, boundary, outputtype='whitelist')
             except StopIteration:
                 break
         res[output] = f'mean:{int(mean(lens))}, median:{median(lens)}, max:{max(lens)}, min:{min(lens)}'
-    sys.stdout.write('Files are generated!\n\n' + '\n'.join(f'{k}\n\t{v}' for (k, v) in res.items()) + '\n\n')
+    if args.verbose:
+        sys.stdout.write('Files are generated!\n\n' + '\n'.join(f'{k}\n\t{v}' for (k, v) in res.items()) + '\n\n')
     return
 
 
@@ -65,7 +66,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input",  nargs='+', required=True, help="Sample file .fasta")
 parser.add_argument("-o", "--output",  nargs='+', required=True, help="Report file .txt")
 parser.add_argument("-t", "--type", required=True, help="The type of output: report, whitelist")
-parser.add_argument("-b", "--boundary", required=False, default=60000, help="Constructing whitelist of scaffolds, default boundary = 60 000")
+parser.add_argument("-b", "--boundary", required=False, default=60000,
+                    help="Constructing whitelist of scaffolds, default boundary = 60 000")
+parser.add_argument("-v", "--verbose", action="store", dest="verbose", help="Verbose output. Default: False")
 
 args = parser.parse_args()
 
