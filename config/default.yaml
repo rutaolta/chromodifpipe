@@ -38,7 +38,7 @@ split_fasta_threads: 1
 trf_threads: 1
 trf_gff_threads: 1
 merge_gff_threads: 1
-repeatmasker_threads: 32
+repeatmasker_threads: 24
 wm_counts_threads: 8
 wm_windowmasker_threads: 8
 wm_gff_threads: 1
