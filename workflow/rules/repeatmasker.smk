@@ -33,8 +33,8 @@ rule rm_gff:
         out_gff_rm_dir_path / "{sample}.gff"
     log:
         std=log_dir_path / "{sample}.repeatmasker.gzip.log",
-        cluster_log=cluster_log_dir_path / "{sample}.repeatmasker.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample}.repeatmasker.cluster.err"
+        cluster_log=cluster_log_dir_path / "{sample}.repeatmasker.gzip.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample}.repeatmasker.gzip.cluster.err"
     conda:
        "../envs/conda.yaml"
     resources:
@@ -47,6 +47,6 @@ rule rm_gff:
         species=config["species"],
         parallel=max([1, int(config["repeatmasker_threads"] / 4)])
     shell:
-        "ex -sc '1d3|x' {input.gff}; echo $?; "
-        "mv {input.gff} {output}; echo $?;  "
-        "pigz -p {params.parallel} -c {input.out} > {input.out}.gz; echo $? "
+        "ex -sc '1d3|x' {input.gff} 2>{log.std}; "
+        "mv {input.gff} {output} 2>>{log.std};  "
+        "pigz -p {params.parallel} -c {input.out} > {input.out}.gz 2>>{log.std} "
