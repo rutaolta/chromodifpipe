@@ -4,7 +4,7 @@ rule plot_last_tab:
         query_genome_whitelist=whitelists_dir_path / "{sample}.whitelist.txt",
         #mavr_out_dir=out_mavr_dir_path
     output:
-        out_dir=out_mavr_dir_path /"{sample}",
+        out_dir=directory(out_mavr_dir_path /"{sample}"),
         png=out_mavr_dir_path /"{sample}"/ "{sample}.png",
         tab=out_mavr_dir_path /"{sample}"/ "{sample}.syn.tab"
     params:
