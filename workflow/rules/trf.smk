@@ -32,7 +32,7 @@ rule create_trf_dirs:
 rule trf:
     input:
         fasta=samples_splitted_dir_path / "{sample}/{scaffold}.fasta",
-        dirs=rules.create_trf_dirs.output
+        out_dir=samples_splitted_dir_path / "{sample}"
     output:
         out_trf_dir_path / "{sample}/{scaffold}.dat"
     log:
@@ -48,7 +48,7 @@ rule trf:
     threads:
         config["trf_threads"]
     shell:
-        "cd {out_trf_dir_path}/{wildcards.sample}; "
+        "cd {input.out_dir}; "
         "trf ../../../{samples_splitted_dir_path}/{wildcards.sample}/{wildcards.scaffold}.fasta 2 7 7 80 10 50 2000 -l 10 -d -h >../../../{log.std} 2>&1; "
         "mv {wildcards.scaffold}.fasta.2.7.7.80.10.50.2000.dat {wildcards.scaffold}.dat >../../../logs/{wildcards.sample}.mv.log 2>&1"
 
