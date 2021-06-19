@@ -55,8 +55,8 @@ ruleorder: create_sample_cluster_log_dirs > split_fasta
 rule all:
     input:
         # aggregated.gff after identifying and masking repeats with trf, windowmasker, repeatmasker
-        expand(cluster_log_dir_path / "{sample}", sample=set(SAMPLES + [config["reference"]])),
-        expand(out_trf_dir_path / "{sample}", sample=set(SAMPLES + [config["reference"]])),
+        expand(cluster_log_dir_path / "{sample}", sample=SAMPLES),
+        expand(out_trf_dir_path / "{sample}", sample=SAMPLES),
         expand(
             (
                 out_gff_trf_dir_path / "{sample}.gff",
@@ -84,13 +84,13 @@ rule all:
 
 rule create_sample_cluster_log_dirs:
     output:
-        directory(expand(cluster_log_dir_path / "{sample}", sample=set(SAMPLES + [config["reference"]])))
+        directory(expand(cluster_log_dir_path / "{sample}", sample=SAMPLES))
     shell:
         "mkdir -p {output}"
 
 rule create_trf_dirs:
     output:
-        directory(expand(out_trf_dir_path / "{sample}", sample=set(SAMPLES + [config["reference"]])))
+        directory(expand(out_trf_dir_path / "{sample}", sample=SAMPLES))
     shell:
         "mkdir -p {output}"
 

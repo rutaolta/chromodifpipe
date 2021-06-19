@@ -26,9 +26,8 @@ cluster_log_dir: "cluster_logs"
 conda_config: "workflow/envs/conda.yaml"
 
 #---- Species ----
-reference: "cerevisiae"
-sample: "cerevisiae"
-species: "yeast"
+reference: "Drosophila_melanogaster"
+species: "Sophophora"
 
 #---- Boundary for scaffold length ----
 boundary: 1000000

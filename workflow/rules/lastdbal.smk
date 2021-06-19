@@ -1,3 +1,5 @@
+ruleorder: lastdb > lastal > last_tar
+
 rule lastdb:
     input:
         out_bedtools_dir_path / "{sample}.fasta"
