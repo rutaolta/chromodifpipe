@@ -26,19 +26,19 @@ cluster_log_dir: "cluster_logs"
 conda_config: "workflow/envs/conda.yaml"
 
 #---- Species ----
-reference: "drosophila_melanogaster"
-sample: "drosophila_ananassae"
-species: "Sophophora"
+reference: "cerevisiae"
+sample: "cerevisiae"
+species: "yeast"
 
 #---- Boundary for scaffold length ----
 boundary: 1000000
 
 #---- Threads ----
 split_fasta_threads: 1
-trf_threads: 16
+trf_threads: 1
 trf_gff_threads: 1
 merge_gff_threads: 1
-repeatmasker_threads: 7
+repeatmasker_threads: 24
 wm_counts_threads: 8
 wm_windowmasker_threads: 8
 wm_gff_threads: 1

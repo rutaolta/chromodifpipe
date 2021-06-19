@@ -6,7 +6,7 @@ rule rm:
         cat=temp(out_rm_dir_path / "{sample}.fasta.cat.gz"),
         masked=temp(out_rm_dir_path / "{sample}.fasta.masked"),
         out=temp(out_rm_dir_path / "{sample}.fasta.out"),
-        tbl=temp(out_rm_dir_path / "{sample}.fasta.tbl")
+        tbl=out_rm_dir_path / "{sample}.fasta.tbl"
     log:
         std=log_dir_path / "{sample}.repeatmasker.log",
         cluster_log=cluster_log_dir_path / "{sample}.repeatmasker.cluster.log",
@@ -21,7 +21,7 @@ rule rm:
         config["repeatmasker_threads"]
     params:
         species=config["species"],
-        parallel=int(config["repeatmasker_threads"] / 4)
+        parallel=max([1, int(config["repeatmasker_threads"] / 4)])
     shell:
         "RepeatMasker -species {params.species} -dir {out_rm_dir_path} {input} -parallel {params.parallel} -gff -xsmall >{log.std} 2>&1; "
 
@@ -30,11 +30,11 @@ rule rm_gff:
         gff=rules.rm.output.gff,
         out=rules.rm.output.out
     output:
-        out_gff_rm_dir_path / "{sample}.gff"
+        gff=out_gff_rm_dir_path / "{sample}.gff"
     log:
-        std=log_dir_path / "{sample}.repeatmasker.log",
-        cluster_log=cluster_log_dir_path / "{sample}.repeatmasker.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample}.repeatmasker.cluster.err"
+        std=log_dir_path / "{sample}.repeatmasker.gzip.log",
+        cluster_log=cluster_log_dir_path / "{sample}.repeatmasker.gzip.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample}.repeatmasker.gzip.cluster.err"
     conda:
        "../envs/conda.yaml"
     resources:
@@ -45,8 +45,7 @@ rule rm_gff:
         config["repeatmasker_threads"]
     params:
         species=config["species"],
-        parallel=int(config["repeatmasker_threads"] / 4)
     shell:
-        "ex -sc '1d3|x' {input.gff}; "
-        "mv {input.gff} {output}; "
-        "pigz -c {input.out} > {input.out}.gz"
+        "ex -sc '1d3|x' {input.gff} 2>{log.std}; "
+        "mv {input.gff} {output.gff} 2>>{log.std};  "
+        "pigz -p {threads} {input.out} 2>>{log.std} "
