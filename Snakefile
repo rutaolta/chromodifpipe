@@ -24,7 +24,7 @@ out_gff_trf_dir_path = Path(config["out_gff_trf_dir"])
 out_gff_wm_dir_path = Path(config["out_gff_wm_dir"])
 out_gff_rm_dir_path = Path(config["out_gff_rm_dir"])
 out_gff_merged_dir_path = Path(config["out_gff_merged_dir"])
-out_bedtools_dir_path = Path(config["out_bedtools_dir"])
+out_bedtools_dir_path = Path   (config["out_bedtools_dir"])
 out_lastdbal_dir_path = Path(config["out_lastdbal_dir"])
 out_mavr_dir_path = Path(config["out_mavr_dir"])
 
@@ -49,11 +49,15 @@ include: "workflow/rules/lastdbal.smk"
 include: "workflow/rules/plot.smk"
 
 ##### target rules #####
-localrules: all
+localrules: all, create_sample_cluster_log_dirs, create_out_dirs, scaffold_length, generate_whitelists#, clean
+ruleorder: create_sample_cluster_log_dirs > create_out_dirs > split_fasta
 
 rule all:
     input:
         # aggregated.gff after identifying and masking repeats with trf, windowmasker, repeatmasker
+        expand(cluster_log_dir_path / "{sample}", sample=SAMPLES),
+        expand(out_trf_dir_path / "{sample}", sample=SAMPLES),
+        #out_mavr_dir_path,
         expand(
             (
                 out_gff_trf_dir_path / "{sample}.gff",
@@ -62,8 +66,6 @@ rule all:
                 out_gff_merged_dir_path / "{sample}.gff"
             ), sample=SAMPLES
         ),
-
-        directory(expand(samples_splitted_dir_path / "{sample}", sample=SAMPLES))
 
         # masked fasta
         expand(
@@ -79,7 +81,20 @@ rule all:
         ),
 
         # plot of similar regions by MAVR
-        expand({out_mavr_dir_path} / "{sample}.png", sample=SAMPLES)
+        expand(out_mavr_dir_path / "{sample}" / "{sample}.png", sample=SAMPLES)
+
+rule create_sample_cluster_log_dirs:
+    output:
+        directory(expand(cluster_log_dir_path / "{sample}", sample=SAMPLES))
+    shell:
+        "mkdir -p {output}"
+
+rule create_out_dirs:
+    output:
+        trf_dirs=directory(expand(out_trf_dir_path / "{sample}", sample=SAMPLES)),
+        #mavr_dirs=directory(out_mavr_dir_path)
+    shell:
+        "mkdir -p {output}"
 
 rule scaffold_length:
     input:
@@ -100,3 +115,7 @@ rule generate_whitelists:
         boundary=config["boundary"]
     shell:
         "python workflow/scripts/seq_report.py -i {input} -o {output} -b {params.boundary} -t whitelist 2>&1"
+
+# rule clean:
+#     shell:
+#         "rm -rf data_output/trf data_output/splitted data_output/gff .snakemake"

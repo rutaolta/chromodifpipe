@@ -1,10 +1,12 @@
 rule plot_last_tab:
     input:
         input_last_tab=out_lastdbal_dir_path / "{sample}.R11.tab.gz",
-        query_genome_whitelist=whitelists_dir_path / "{sample}.whitelist.txt"
+        query_genome_whitelist=whitelists_dir_path / "{sample}.whitelist.txt",
+        #mavr_out_dir=out_mavr_dir_path
     output:
-        png=out_mavr_dir_path / "{sample}.png",
-        tab=out_mavr_dir_path / "{sample}.syn.tab"
+        out_dir=directory(out_mavr_dir_path /"{sample}"),
+        png=out_mavr_dir_path /"{sample}"/ "{sample}.png",
+        tab=out_mavr_dir_path /"{sample}"/ "{sample}.syn.tab"
     params:
         target_genome_whitelist=whitelists_dir_path / (config["reference"] + ".whitelist.txt")
     log:
@@ -22,6 +24,6 @@ rule plot_last_tab:
     shell:
         "dotplot_from_last_tab.py "
         "-i {input.input_last_tab} "
-        "-o {out_mavr_dir_path}/{wildcards.sample} "
+        "-o {out_mavr_dir_path}/{wildcards.sample}/{wildcards.sample} "
         "-w {params.target_genome_whitelist} "
-        "-x {input.query_genome_whitelist} 2>&1"
+        "-x {input.query_genome_whitelist} > {log.std} 2>&1"

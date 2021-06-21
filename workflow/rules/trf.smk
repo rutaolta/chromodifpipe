@@ -1,6 +1,7 @@
 import os
 
-ruleorder: split_fasta > trf > trf_gff
+ruleorder: split_fasta > create_out_dirs > trf > trf_gff
+
 
 checkpoint split_fasta:
     input:
@@ -24,7 +25,8 @@ checkpoint split_fasta:
 
 rule trf:
     input:
-        samples_splitted_dir_path / "{sample}/{scaffold}.fasta"
+        fasta=samples_splitted_dir_path / "{sample}/{scaffold}.fasta",
+        out_dir=out_trf_dir_path / "{sample}"
     output:
         out_trf_dir_path / "{sample}/{scaffold}.dat"
     log:
@@ -40,8 +42,8 @@ rule trf:
     threads:
         config["trf_threads"]
     shell:
-        "mkdir -p {out_trf_dir_path}/{wildcards.sample}; cd {out_trf_dir_path}/{wildcards.sample}; "
-        "trf ../../../{samples_splitted_dir_path}/{wildcards.sample}/{wildcards.scaffold}.fasta 2 7 7 80 10 50 2000 -l 10 -d -h >../../../{log.std} 2>&1; "
+        "cd {input.out_dir}; "
+        "trf ../../../{samples_splitted_dir_path}/{wildcards.sample}/{wildcards.scaffold}.fasta 2 7 7 80 10 50 2000 -l 10 -d -h >../../../{log.std} 2>&1 || true; "
         "mv {wildcards.scaffold}.fasta.2.7.7.80.10.50.2000.dat {wildcards.scaffold}.dat >../../../logs/{wildcards.sample}.mv.log 2>&1"
 
 def trf_gff_input(wildcards):

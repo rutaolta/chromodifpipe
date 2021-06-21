@@ -26,19 +26,18 @@ cluster_log_dir: "cluster_logs"
 conda_config: "workflow/envs/conda.yaml"
 
 #---- Species ----
-reference: "drosophila_melanogaster"
-sample: "drosophila_ananassae"
-species: "Saccharomyces cerevisiae"
+reference: "felis_catus" #"Drosophila_melanogaster"
+species: "carnivora" #"Sophophora"
 
 #---- Boundary for scaffold length ----
 boundary: 1000000
 
 #---- Threads ----
 split_fasta_threads: 1
-trf_threads: 16
+trf_threads: 1
 trf_gff_threads: 1
 merge_gff_threads: 1
-repeatmasker_threads: 7
+repeatmasker_threads: 24
 wm_counts_threads: 8
 wm_windowmasker_threads: 8
 wm_gff_threads: 1
@@ -50,10 +49,10 @@ last_tar_threads: 4
 plot_last_tab_threads: 1
 
 #---- Time ----
-split_fasta_time: "00:10:00"
-trf_time: "04:00:00"
-trf_gff_time: "00:10:00"
-merge_gff_time: "00:10:00"
+split_fasta_time: "00:30:00"
+trf_time: "05:00:00"
+trf_gff_time: "00:30:00"
+merge_gff_time: "00:30:00"
 repeatmasker_time: "24:00:00"
 wm_counts_time: "04:00:00"
 wm_windowmasker_time: "04:00:00"
@@ -66,17 +65,17 @@ last_tar_time: "00:30:00"
 plot_last_tab_time: "02:00:00"
 
 #---- Memory ----
-split_fasta_mem_mb: 5000
-trf_mem_mb: 2000
-trf_gff_mem_mb: 3000
-merge_gff_mem_mb: 3000
-repeatmasker_mem_mb: 20000
+split_fasta_mem_mb: 10000
+trf_mem_mb: 10000
+trf_gff_mem_mb: 10000
+merge_gff_mem_mb: 10000
+repeatmasker_mem_mb: 50000
 wm_counts_mem_mb: 10000
 wm_windowmasker_mem_mb: 10000
 wm_gff_mem_mb: 3000
 bedtools_sort_mem_mb: 5000
 bedtools_mem_mb: 5000
 lastdb_mem_mb: 30000
-lastal_mem_mb: 50000
+lastal_mem_mb: 200000
 last_tar_mem_mb: 1000
-plot_last_tab_mem_mb: 1000
+plot_last_tab_mem_mb: 50000
