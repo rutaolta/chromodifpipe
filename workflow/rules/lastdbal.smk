@@ -31,8 +31,9 @@ rule lastdb:
 
 rule lastal:
     input:
-        lastdb=out_bedtools_dir_path / "{sample}.fasta",
-        bck=out_lastdbal_dir_path / config["reference"] / (config["reference"] + ".YASS.R11.soft.bck")
+        fasta=out_bedtools_dir_path / "{sample}.fasta",
+        bck=out_lastdbal_dir_path / config["reference"] / (config["reference"] + ".YASS.R11.soft.bck"),
+        sample_bck=out_lastdbal_dir_path / "{sample}/{sample}.YASS.R11.soft.bck"
     output:
         maf=temp(out_lastdbal_dir_path / "{sample}.R11.maf"),
         tab=temp(out_lastdbal_dir_path / "{sample}.R11.tab")
@@ -51,7 +52,7 @@ rule lastal:
     threads: 
         config["lastal_threads"]
     shell:
-        "lastal -P {threads} -R11 -f MAF -i 4G {params.prefix} {input.lastdb} 2>{log.std} | tee {output.maf} | maf-convert tab > {output.tab} "
+        "lastal -P {threads} -R11 -f MAF -i 4G {params.prefix} {input.fasta} 2>{log.std} | tee {output.maf} | maf-convert tab > {output.tab} "
 
 rule last_tar:
     input:

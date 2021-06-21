@@ -41,7 +41,7 @@ def get_scaffold_info(inputpaths, outputpaths, boundary, outputtype='whitelist')
                 seq = next(seq_iter)
                 scaffold_row = seq[0].split(" ", 1)
                 scaffold = scaffold_row[0]
-                details = scaffold_row[1]
+                details = '' if len(scaffold_row) > 0 else scaffold_row[1]
                 scaffold_len = len(seq[1])
                 lens.append(scaffold_len)
                 with open(output, 'a') as f:
