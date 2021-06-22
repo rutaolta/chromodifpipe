@@ -19,14 +19,19 @@ def split_fasta(input, output):
 
     seq_iter = map(lambda seq: seq.split("\n", 1), file.split(">"))
     next(seq_iter)
+    sequence = ''
 
     while True:
         try:
             seq = next(seq_iter)
             scaffold = seq[0].split(" ", 1)[0]
-            filename = f'{output}/{scaffold}.fasta'
-            with open(filename, 'a') as f:
-                f.write(f'>{scaffold}\n{seq[1]}')
+            if (len(sequence) + len(seq[1])) > 500000:
+                filename = f'{output}/{scaffold}.fasta'
+                with open(filename, 'a') as f:
+                    f.write(f'{sequence}>{scaffold}\n{seq[1]}')
+                sequence = ''
+            else:
+                sequence = f'{sequence}>{scaffold}\n{seq[1]}'
         except StopIteration:
             break
 
@@ -46,3 +51,4 @@ outfilepath = args.output
 
 # call splitting function for given input fasta-files
 split_fasta(infilepath, outfilepath)
+# split_fasta('../../data_input/samples/bassariscus_astutus.fasta', '../../data_output/splitted/bassariscus_astutus/')
