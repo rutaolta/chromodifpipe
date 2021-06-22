@@ -51,4 +51,3 @@ outfilepath = args.output
 
 # call splitting function for given input fasta-files
 split_fasta(infilepath, outfilepath)
-# split_fasta('../../data_input/samples/bassariscus_astutus.fasta', '../../data_output/splitted/bassariscus_astutus/')
