@@ -73,9 +73,9 @@ repeatmasker_mem_mb: 50000
 wm_counts_mem_mb: 10000
 wm_windowmasker_mem_mb: 10000
 wm_gff_mem_mb: 3000
-bedtools_sort_mem_mb: 5000
-bedtools_mem_mb: 5000
-lastdb_mem_mb: 30000
+bedtools_sort_mem_mb: 20000
+bedtools_mem_mb: 20000
+lastdb_mem_mb: 50000
 lastal_mem_mb: 200000
-last_tar_mem_mb: 1000
+last_tar_mem_mb: 3000
 plot_last_tab_mem_mb: 50000
