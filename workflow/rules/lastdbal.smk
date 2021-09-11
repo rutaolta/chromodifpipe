@@ -35,8 +35,8 @@ rule lastal:
         bck=out_lastdbal_dir_path / config["reference"] / (config["reference"] + ".YASS.R11.soft.bck"),
         sample_bck=out_lastdbal_dir_path / "{sample}/{sample}.YASS.R11.soft.bck"
     output:
-        maf=temp(out_lastdbal_dir_path / "{sample}.R11.maf"),
-        tab=temp(out_lastdbal_dir_path / "{sample}.R11.tab")
+        maf=temp(out_lastdbal_dir_path / config["reference"] / "{sample}.R11.maf"),
+        tab=temp(out_lastdbal_dir_path / config["reference"] / "{sample}.R11.tab")
     params:
         prefix=out_lastdbal_dir_path / config["reference"] / (config["reference"] + ".YASS.R11.soft")
     log:
@@ -59,8 +59,8 @@ rule last_tar:
         maf=rules.lastal.output.maf,
         tab=rules.lastal.output.tab
     output:
-        maf=out_lastdbal_dir_path / "{sample}.R11.maf.gz",
-        tab=out_lastdbal_dir_path / "{sample}.R11.tab.gz"
+        maf=out_lastdbal_dir_path / config["reference"] / "{sample}.R11.maf.gz",
+        tab=out_lastdbal_dir_path / config["reference"] / "{sample}.R11.tab.gz"
     log:
         std=log_dir_path / "{sample}.lastal.gzip.log",
         cluster_log=cluster_log_dir_path / "{sample}.lastal.gzip.cluster.log",

@@ -26,8 +26,8 @@ cluster_log_dir: "cluster_logs"
 conda_config: "workflow/envs/conda.yaml"
 
 #---- Species ----
-reference: "felis_catus" #"Drosophila_melanogaster"
-species: "carnivora" #"Sophophora"
+reference: "homo_sapiens" # "Drosophila_melanogaster" #"martes_foina" #"felis_catus"
+species: "human" # "saccharomyces" #"Sophophora" #"carnivora"
 
 #---- Boundary for scaffold length ----
 boundary: 1000000
