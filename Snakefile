@@ -14,6 +14,7 @@ reference_dir_path = Path(config["reference_dir"])
 samples_dir_path = Path(config["samples_dir"])
 samples_splitted_dir_path = Path(config["samples_splitted_dir"])
 whitelists_dir_path = Path(config["whitelists_dir"])
+synonyms_dir_path = Path(config["synonyms_dir"])
 reports_dir_path = Path(config["reports_dir"])
 
 out_trf_dir_path = Path(config["out_trf_dir"])
@@ -81,7 +82,7 @@ rule all:
         ),
 
         # plot of similar regions by MAVR
-        expand(out_mavr_dir_path / "{sample}" / "{sample}.png", sample=SAMPLES)
+        expand(out_mavr_dir_path / config["reference"] / "{sample}.png", sample=SAMPLES)
 
 rule create_sample_cluster_log_dirs:
     output:

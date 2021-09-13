@@ -10,6 +10,7 @@ __pycache__/
 data_output/
 data_input/reports/
 data_input/whitelists/
+data_input/synonyms
 
 # Input files
 *.fasta

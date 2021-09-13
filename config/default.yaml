@@ -2,6 +2,7 @@
 reference_dir: "data_input/reference"
 samples_dir: "data_input/samples"
 whitelists_dir: "data_input/whitelists"
+synonyms_dir: "data_input/synonyms"
 reports_dir: "data_input/reports"
 
 samples_splitted_dir: "data_output/splitted"
@@ -27,7 +28,7 @@ conda_config: "workflow/envs/conda.yaml"
 
 #---- Species ----
 reference: "homo_sapiens" # "Drosophila_melanogaster" #"martes_foina" #"felis_catus"
-species: "human" # "saccharomyces" #"Sophophora" #"carnivora"
+species: "primate" # "saccharomyces" #"Sophophora" #"carnivora"
 
 #---- Boundary for scaffold length ----
 boundary: 1000000
