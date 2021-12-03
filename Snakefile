@@ -76,8 +76,8 @@ rule all:
         # similar regions found by LAST
         expand(
             (
-                out_lastdbal_dir_path / "{sample}.R11.maf.gz",
-                out_lastdbal_dir_path / "{sample}.R11.tab.gz"
+                out_lastdbal_dir_path / config["reference"] / "{sample}.R11.maf.gz",
+                out_lastdbal_dir_path / config["reference"] / "{sample}.R11.tab.gz"
             ), sample=SAMPLES
         ),
 
@@ -115,6 +115,17 @@ rule generate_whitelists:
         boundary=config["boundary"]
     shell:
         "python workflow/scripts/seq_report.py -i {input} -o {output} -b {params.boundary} -t whitelist 2>&1"
+
+rule generate_synonyms_order:
+    input:
+        expand(samples_dir_path / "{sample}.fasta", sample=SAMPLES)
+    output:
+        synonym=expand(synonyms_dir_path / "{sample}.synonym.txt", sample=SAMPLES),
+        order=expand(synonyms_dir_path / "{sample}.order.txt", sample=SAMPLES)
+    params:
+        boundary=config["boundary"]
+    shell:
+        "touch {output.synonym}; touch {output.order}"
 
 # rule clean:
 #     shell:

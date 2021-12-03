@@ -4,7 +4,6 @@ rule lastdb:
     input:
         out_bedtools_dir_path / "{sample}.fasta"
     output:
-        dir=directory(out_lastdbal_dir_path / "{sample}"),
         bck=out_lastdbal_dir_path / "{sample}/{sample}.YASS.R11.soft.bck",
         des=out_lastdbal_dir_path / "{sample}/{sample}.YASS.R11.soft.des",
         prj=out_lastdbal_dir_path / "{sample}/{sample}.YASS.R11.soft.prj",
@@ -19,7 +18,8 @@ rule lastdb:
     conda:
         "../envs/conda.yaml"
     params:
-        prefix="YASS.R11.soft"
+        prefix="YASS.R11.soft",
+        dir=directory(out_lastdbal_dir_path / "{sample}")
     resources:
         cpus=config["lastdb_threads"],
         time=config["lastdb_time"],
@@ -27,7 +27,7 @@ rule lastdb:
     threads: 
         config["lastdb_threads"]
     shell:
-        "lastdb -c -R11 -P {threads} -u YASS {output.dir}/{wildcards.sample}.{params.prefix} {input} > {log.std} 2>&1"
+        "lastdb -c -R11 -P {threads} -u YASS {params.dir}/{wildcards.sample}.{params.prefix} {input} > {log.std} 2>&1"
 
 rule lastal:
     input:
