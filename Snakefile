@@ -50,7 +50,7 @@ include: "workflow/rules/lastdbal.smk"
 include: "workflow/rules/plot.smk"
 
 ##### target rules #####
-localrules: all, create_sample_cluster_log_dirs, create_out_dirs, scaffold_length, generate_whitelists#, clean
+localrules: all, create_sample_cluster_log_dirs, create_out_dirs, scaffold_length, generate_whitelists, generate_synonyms_order #, clean
 ruleorder: create_sample_cluster_log_dirs > create_out_dirs > split_fasta
 
 rule all:
