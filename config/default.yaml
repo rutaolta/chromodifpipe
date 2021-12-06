@@ -3,6 +3,7 @@ reference_dir: "data_input/reference"
 samples_dir: "data_input/samples"
 whitelists_dir: "data_input/whitelists"
 synonyms_dir: "data_input/synonyms"
+order_dir: "data_input/order"
 reports_dir: "data_input/reports"
 
 samples_splitted_dir: "data_output/splitted"
@@ -30,8 +31,13 @@ conda_config: "workflow/envs/conda.yaml"
 reference: "homo_sapiens" # "Drosophila_melanogaster" #"martes_foina" #"felis_catus"
 species: "primate" # "saccharomyces" #"Sophophora" #"carnivora"
 
-#---- Boundary for scaffold length ----
-boundary: 1000000
+#---- Boundaries ----
+boundary: 1000000 #min boundary for scaffold length
+filter_range: 5000 #min length boundary for common sequence in .tab
+
+#---- Parameters ----
+plot_by_chr: 1 #plot by each species chromosome based on fish (1 - yes, 0 - no)
+plot_unfiltered: 1 #plot based on unfiltered .tab (1 - yes, 0 - no)
 
 #---- Threads ----
 split_fasta_threads: 1
@@ -51,7 +57,7 @@ plot_last_tab_threads: 1
 
 #---- Time ----
 split_fasta_time: "00:30:00"
-trf_time: "05:00:00"
+trf_time: "07:00:00"
 trf_gff_time: "00:30:00"
 merge_gff_time: "00:30:00"
 repeatmasker_time: "72:00:00"
@@ -67,10 +73,10 @@ plot_last_tab_time: "02:00:00"
 
 #---- Memory ----
 split_fasta_mem_mb: 10000
-trf_mem_mb: 10000
+trf_mem_mb: 50000
 trf_gff_mem_mb: 10000
 merge_gff_mem_mb: 10000
-repeatmasker_mem_mb: 50000
+repeatmasker_mem_mb: 100000
 wm_counts_mem_mb: 10000
 wm_windowmasker_mem_mb: 10000
 wm_gff_mem_mb: 3000

@@ -15,6 +15,7 @@ samples_dir_path = Path(config["samples_dir"])
 samples_splitted_dir_path = Path(config["samples_splitted_dir"])
 whitelists_dir_path = Path(config["whitelists_dir"])
 synonyms_dir_path = Path(config["synonyms_dir"])
+order_dir_path = Path(config["order_dir"])
 reports_dir_path = Path(config["reports_dir"])
 
 out_trf_dir_path = Path(config["out_trf_dir"])
@@ -82,7 +83,7 @@ rule all:
         ),
 
         # plot of similar regions by MAVR
-        expand(out_mavr_dir_path / config["reference"] / "{sample}.png", sample=SAMPLES)
+        expand(out_mavr_dir_path / config["reference"] / "filtered_{sample}.png", sample=SAMPLES)
 
 rule create_sample_cluster_log_dirs:
     output:
@@ -121,7 +122,7 @@ rule generate_synonyms_order:
         expand(samples_dir_path / "{sample}.fasta", sample=SAMPLES)
     output:
         synonym=expand(synonyms_dir_path / "{sample}.synonym.txt", sample=SAMPLES),
-        order=expand(synonyms_dir_path / "{sample}.order.txt", sample=SAMPLES)
+        order=expand(order_dir_path / config["reference"] / "{sample}.order.txt", sample=SAMPLES)
     params:
         boundary=config["boundary"]
     shell:
