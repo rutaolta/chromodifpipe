@@ -6,6 +6,16 @@ rule filter_tab:
     params:
         filter_range=5000,
         reference=config["reference"]
+    log:
+        std=log_dir_path / "{sample}.plot_last_tab.log",
+        cluster_log=cluster_log_dir_path / "{sample}.plot_last_tab.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample}.plot_last_tab.cluster.err"
+    conda:
+        "../envs/plot.yaml"
+    resources:
+        cpus=config["plot_last_tab_threads"],
+        time=config["plot_last_tab_time"],
+        mem=config["plot_last_tab_mem_mb"]
     shell:
         "gzip -dk {input}; "
         "awk -F, '$4 > {params.filter_range}' {out_lastdbal_dir_path}/{params.reference}/{wildcards.sample}.R11.tab > {out_lastdbal_dir_path}/{params.reference}/{wildcards.sample}.R11.tab.filtered; "
