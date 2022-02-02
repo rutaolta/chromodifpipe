@@ -19,9 +19,6 @@ def prepare_plot(input, output, print_original, query_whitelist, target_whitelis
     query_name = get_name_from_path(query_whitelist)
     query_label = make_label_from_filename(query_name)
     target_label = make_label_from_filename(get_name_from_path(target_whitelist))
-    
-    if query_label == target_label: 
-        return
 
     qscaffolds, qsynonym_exist = get_columns_from_file(query_whitelist)
     tscaffolds, tsynonym_exist = get_columns_from_file(target_whitelist)
@@ -40,6 +37,7 @@ def prepare_plot(input, output, print_original, query_whitelist, target_whitelis
 
 def plot(input, output, bottom_offset, left_offset, target_whitelist, query_whitelist, target_synonym, query_synonym, target_label, query_label):
     cmd = f'''
+dotplot_from_last_tab.py 
 -i {input} 
 -o {output} 
 -w {target_whitelist} 
@@ -58,12 +56,8 @@ def plot(input, output, bottom_offset, left_offset, target_whitelist, query_whit
         cmd += f' -s {query_synonym} --query_syn_file_key_column 0 --query_syn_file_value_column 1'
     if target_synonym is not None:
         cmd += f' -y {target_synonym} --target_syn_file_key_column 0 --target_syn_file_value_column 1'
-# -t '{target_label} and {query_label}' 
-# --top_offset 0.5  
-# --right_offset 0.5 
 
-    print(cmd)
-    subprocess.run(['dotplot_from_last_tab.py', cmd])
+    subprocess.run(cmd, shell=True)
 
 
 # parsing args
