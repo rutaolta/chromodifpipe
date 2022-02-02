@@ -13,20 +13,17 @@ def make_label_from_filename(filename):
 
 def get_columns_from_file(file):
     df = read_csv(file, sep="\t", header=None)
-    return ','.join(df[0]), True if len(df.columns) > 1 else False
+    return ','.join(df[0]), file if len(df.columns) > 1 else None
 
 def prepare_plot(input, output, print_original, query_whitelist, target_whitelist):
     query_name = get_name_from_path(query_whitelist)
     query_label = make_label_from_filename(query_name)
     target_label = make_label_from_filename(get_name_from_path(target_whitelist))
 
-    qscaffolds, qsynonym_exist = get_columns_from_file(query_whitelist)
-    tscaffolds, tsynonym_exist = get_columns_from_file(target_whitelist)
+    qscaffolds, qsynonym_file = get_columns_from_file(query_whitelist)
+    tscaffolds, tsynonym_file = get_columns_from_file(target_whitelist)
 
-    qsynonym = query_whitelist if qsynonym_exist else None
-    tsynonym = target_whitelist if tsynonym_exist else None
-
-    plot(input, output+"/filtered_"+query_name, 0.15, 0.15, tscaffolds, qscaffolds, tsynonym, qsynonym, target_label, query_label)
+    plot(input, output+"/filtered_"+query_name, 0.15, 0.15, tscaffolds, qscaffolds, tsynonym_file, qsynonym_file, target_label, query_label)
     
 #     if print_original:
 #         plot(input, output+"original_"+query_name, bottom_offset=0.15, left_offset=0.15,
