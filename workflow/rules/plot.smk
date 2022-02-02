@@ -25,22 +25,13 @@ rule plot_last_tab:
     input:
         input_last_tab=out_lastdbal_dir_path / config["reference"] / "{sample}.R11.tab.gz",
         input_last_tab_filtered=out_lastdbal_dir_path / config["reference"] / "{sample}.R11.tab.filtered.gz",
-        # query_genome_whitelist=whitelists_dir_path / "{sample}.whitelist.txt",
-        # query_genome_synonym=synonyms_dir_path / "{sample}.synonym.txt",
-        # query_order=order_dir_path / config["reference"] / "{sample}.order.txt"
-        query_scaffolds=order_dir_path / config["reference"] / "{sample}.scaffolds.txt"
+        query_whitelist=whitelists_dir_path / config["reference"] / "{sample}.whitelist.txt"
     output:
         png=out_mavr_dir_path / config["reference"] / "filtered_{sample}.png",
         tab=out_mavr_dir_path / config["reference"] / "filtered_{sample}.syn.tab"
     params:
-        # target_label=config["reference"].replace('_',' ').capitalize(),
-        # query_label="{sample}",
-        # target_genome_whitelist=whitelists_dir_path / (config["reference"] + ".whitelist.txt"),
-        # target_genome_synonym=synonyms_dir_path / (config["reference"] + ".synonym.txt"),
-        # target_order=order_dir_path / config["reference"] / (config["reference"] + ".order.txt"),
-        target_scaffolds=order_dir_path / config["reference"] / (config["reference"] + ".scaffolds.txt"),
+        target_whitelist=whitelists_dir_path / config["reference"] / (config["reference"] + ".whitelist.txt"),
         out_dir=directory(out_mavr_dir_path / config["reference"])
-        # reference=config["reference"]
     log:
         std=log_dir_path / "{sample}.plot_last_tab.log",
         cluster_log=cluster_log_dir_path / "{sample}.plot_last_tab.cluster.log",
@@ -54,5 +45,5 @@ rule plot_last_tab:
     threads:
         config["plot_last_tab_threads"]
     shell:
-      "python workflow/scripts/plot_last_tab.py -i {input.input_last_tab_filtered} -o {params.out_dir} -p=False -qs {input.query_scaffolds} -ts {params.target_scaffolds} >{log.std} 2>&1"  
+      "python workflow/scripts/plot_last_tab.py -i {input.input_last_tab_filtered} -o {params.out_dir} -p -qs {input.query_whitelist} -ts {params.target_whitelist} >{log.std} 2>&1"  
 

@@ -14,8 +14,6 @@ reference_dir_path = Path(config["reference_dir"])
 samples_dir_path = Path(config["samples_dir"])
 samples_splitted_dir_path = Path(config["samples_splitted_dir"])
 whitelists_dir_path = Path(config["whitelists_dir"])
-synonyms_dir_path = Path(config["synonyms_dir"])
-order_dir_path = Path(config["order_dir"])
 reports_dir_path = Path(config["reports_dir"])
 
 out_trf_dir_path = Path(config["out_trf_dir"])
@@ -51,7 +49,7 @@ include: "workflow/rules/lastdbal.smk"
 include: "workflow/rules/plot.smk"
 
 ##### target rules #####
-localrules: all, create_sample_cluster_log_dirs, create_out_dirs, scaffold_length, generate_whitelists, generate_synonyms_order #, clean
+localrules: all, create_sample_cluster_log_dirs, create_out_dirs, scaffold_length, generate_whitelists #, clean
 ruleorder: create_sample_cluster_log_dirs > create_out_dirs > split_fasta
 
 rule all:
@@ -111,22 +109,11 @@ rule generate_whitelists:
     input:
         expand(samples_dir_path / "{sample}.fasta", sample=SAMPLES)
     output:
-        expand(whitelists_dir_path / "{sample}.whitelist.txt", sample=SAMPLES)
+        expand(whitelists_dir_path / config["reference"] / "{sample}.whitelist.txt", sample=SAMPLES)
     params:
         boundary=config["boundary"]
     shell:
         "python workflow/scripts/seq_report.py -i {input} -o {output} -b {params.boundary} -t whitelist 2>&1"
-
-rule generate_synonyms_order:
-    input:
-        expand(samples_dir_path / "{sample}.fasta", sample=SAMPLES)
-    output:
-        synonym=expand(synonyms_dir_path / "{sample}.synonym.txt", sample=SAMPLES),
-        order=expand(order_dir_path / config["reference"] / "{sample}.order.txt", sample=SAMPLES)
-    params:
-        boundary=config["boundary"]
-    shell:
-        "touch {output.synonym}; touch {output.order}"
 
 # rule clean:
 #     shell:
