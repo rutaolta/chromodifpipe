@@ -34,8 +34,7 @@ boundary: 1000000 #min boundary for scaffold length
 filter_range: 5000 #min length boundary for common sequence in .tab
 
 #---- Parameters ----
-plot_by_chr: 1 #plot by each species chromosome based on fish (1 - yes, 0 - no)
-plot_unfiltered: 1 #plot based on unfiltered .tab (1 - yes, 0 - no)
+plot_original: true #plot based on unfiltered .tab
 
 #---- Threads ----
 split_fasta_threads: 1

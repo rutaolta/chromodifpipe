@@ -15,7 +15,7 @@ def get_columns_from_file(file):
     df = read_csv(file, sep="\t", header=None)
     return ','.join(df[0]), file if len(df.columns) > 1 else None
 
-def prepare_plot(input, output, print_original, query_whitelist, target_whitelist):
+def prepare_plot(input_original, input_filtered, output, print_original, query_whitelist, target_whitelist):
     query_name = get_name_from_path(query_whitelist)
     query_label = make_label_from_filename(query_name)
     target_label = make_label_from_filename(get_name_from_path(target_whitelist))
@@ -23,13 +23,10 @@ def prepare_plot(input, output, print_original, query_whitelist, target_whitelis
     qscaffolds, qsynonym_file = get_columns_from_file(query_whitelist)
     tscaffolds, tsynonym_file = get_columns_from_file(target_whitelist)
 
-    plot(input, output+"/filtered_"+query_name, 0.15, 0.15, tscaffolds, qscaffolds, tsynonym_file, qsynonym_file, target_label, query_label)
+    plot(input_filtered, output+"/filtered_"+query_name, 0.15, 0.15, tscaffolds, qscaffolds, tsynonym_file, qsynonym_file, target_label, query_label)
     
-#     if print_original:
-#         plot(input, output+"original_"+query_name, bottom_offset=0.15, left_offset=0.15,
-#             tscaffolds, qscaffolds,
-#             target_synonym, query_synonym,
-#             target_label, query_label)
+    if print_original:
+        plot(input_original, output+"/original_"+query_name, 0.15, 0.15, tscaffolds, qscaffolds, tsynonym_file, qsynonym_file, target_label, query_label)
 
 
 def plot(input, output, bottom_offset, left_offset, target_whitelist, query_whitelist, target_synonym, query_synonym, target_label, query_label):
@@ -59,7 +56,7 @@ dotplot_from_last_tab.py
 
 # parsing args
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input", required=True, help="Original .tab-file")
+parser.add_argument("-i", "--input",  nargs='+', required=True, help="Original .tab-file")
 parser.add_argument("-p", "--print_original", action='store_true', default=False, help="Plot from original .tab-file? If NO it will plot only for filtered data")
 parser.add_argument("-qs", "--query_whitelist", required=True, help="File with whitelist of scaffolds for query species is required (Y axes). Original scaffolds should be placed in the first column. If it is neccessary synonyms could be placed in the second column of the same file. Order would be also taken from the specified file")
 parser.add_argument("-ts", "--target_whitelist", required=True, help="File with whitelist of scaffolds for target species is required (X axes). Original scaffolds should be placed in the first column. If it is neccessary synonyms could be placed in the second column of the same file. Order would be also taken from the specified file")
@@ -67,11 +64,12 @@ parser.add_argument("-o", "--output", required=True, help="Output directory name
 
 args = parser.parse_args()
 
-infilepath = args.input
-outfilepath = args.output
+input_original = args.input[0]
+input_filtered = args.input[1]
+output = args.output
 print_original = args.print_original
 query_whitelist = args.query_whitelist
 target_whitelist = args.target_whitelist
 
 # call function for given input to plot alignment
-prepare_plot(infilepath, outfilepath, print_original, query_whitelist, target_whitelist)
+prepare_plot(input_original, input_filtered, output, print_original, query_whitelist, target_whitelist)

@@ -31,7 +31,8 @@ rule plot_last_tab:
         tab=out_mavr_dir_path / config["reference"] / "filtered_{sample}.syn.tab"
     params:
         target_whitelist=whitelists_dir_path / config["reference"] / (config["reference"] + ".whitelist.txt"),
-        out_dir=directory(out_mavr_dir_path / config["reference"])
+        out_dir=directory(out_mavr_dir_path / config["reference"]),
+        plot_original='-p' if config["plot_original"] else ''
     log:
         std=log_dir_path / "{sample}.plot_last_tab.log",
         cluster_log=cluster_log_dir_path / "{sample}.plot_last_tab.cluster.log",
@@ -45,5 +46,5 @@ rule plot_last_tab:
     threads:
         config["plot_last_tab_threads"]
     shell:
-      "python workflow/scripts/plot_last_tab.py -i {input.input_last_tab_filtered} -o {params.out_dir} -p -qs {input.query_whitelist} -ts {params.target_whitelist} >{log.std} 2>&1"  
+      "python workflow/scripts/plot_last_tab.py -i {input.input_last_tab} {input.input_last_tab_filtered} -o {params.out_dir} {params.plot_original} -qs {input.query_whitelist} -ts {params.target_whitelist} >{log.std} 2>&1"  
 
