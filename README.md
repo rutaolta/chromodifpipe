@@ -1,10 +1,10 @@
 # About
 
-Pipeline gets samples in fasta format and generates comparison with reference.
+Pipeline gets samples in fasta format and whole genome alignment of desired samples on reference.
 
-Comparison is performed on the chromosome level.
+Obtained alignment could demonstrate interesting rearrangements on the chromosome level.
 
-The connection between samples and reference you can find on the resulting plot in `data_output` folder.
+The the resulting plot of alignment you can find in `data_output` folder.
 
 # Configure Pipeline
 
