@@ -1,10 +1,10 @@
 # About
 
-Pipeline gets samples in fasta format and provide whole genome alignment of desired samples on specified reference.
+The pipeline gets samples in fasta format and provides whole genome alignment of desired samples on specified reference.
 
 Obtained alignment could demonstrate interesting rearrangements on the chromosome level.
 
-The the resulting plot of alignment you can find in `data_output` folder.
+The resulting plot of alignment you can find in `data_output` folder.
 
 # Configure Pipeline
 
@@ -28,7 +28,7 @@ Activate conda environment with snakemake:
 
 Before running the pipeline you should add whitelist of scaffolds you are interested in.
 
-## Scaffold length report
+### Scaffold length report
 
 To check scaffold length please use following command. 
 That can be useful for choosing scaffolds for whitelists.
@@ -36,7 +36,7 @@ The generated reports will be put in `data_input/reports` folder.
 
 `snakemake -pr --use-conda --cores 1 scaffold_length`
 
-## Generate whitelists
+### Generate whitelists
 
 To generate whitelists of required scaffolds please use following command. This step is required for alignament plot.
 
