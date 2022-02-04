@@ -38,9 +38,11 @@ The generated reports will be put in `data_input/reports` folder.
 
 ## Generate whitelists
 
-To generate whitelists of required scaffolds please use following command.
-They will be generated using boundary for each sample.
-Boundaries should be added into `config`.
+To generate whitelists of required scaffolds please use following command. This step is required for alignament plot.
+
+Whitelists will be generated using boundary for each sample.
+Boundaries should be added into `config/default.yaml` parameter `boundary`.
+
 The generated whitelists will be put in `data_input/[name of your reference]/whitelists` folder.
 
 `snakemake -pr --use-conda --cores 1 generate_whitelists`
@@ -55,4 +57,6 @@ The upper directory is named by the reference for you to be able to change the o
 
 `snakemake --cores 8 --configfile config/default.yaml --forceall --use-conda --profile profile/slurm/ --printshellcmds --latency-wait 60`
 
-If you need to rerun plot step, for example if you added synonyms in whitelist.txt, then you should remove or rename somehow old results in `data_output/mavr/[name of your reference]` *.png and *.syn.tab files with the name of desired species.
+Typically data should by filtered from noise-like dots on the plot that could interfere analysis. Filter boundary is set in `config/default.yaml` parameter `filter_range`. Moreover if non-filtered plots look good and you only need to redraw filtered plots, you can skip drawing plot with originals to speed up. If you set parameter `plot_original` to `false` the pipe will redraw only plots based on filtered data.
+
+If you need to rerun plot step, for example if you added synonyms in whitelist.txt, then you should remove or rename somehow old results for desired species in `data_output/mavr/[name of your reference]` stored in *.png and *.syn.tab files.
