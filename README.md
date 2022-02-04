@@ -1,6 +1,6 @@
 # About
 
-Pipeline gets samples in fasta format and whole genome alignment of desired samples on reference.
+Pipeline gets samples in fasta format and provide whole genome alignment of desired samples on specified reference.
 
 Obtained alignment could demonstrate interesting rearrangements on the chromosome level.
 
