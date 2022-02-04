@@ -24,9 +24,7 @@ Activate conda environment with snakemake:
 
 `conda activate snakemake`
 
-# Run
-
-`snakemake --cores 8 --configfile config/default.yaml --forceall --use-conda --profile profile/slurm/ --printshellcmds --latency-wait 60`
+# Before run
 
 Before running the pipeline you should add whitelist of scaffolds you are interested in.
 
@@ -43,6 +41,18 @@ The generated reports will be put in `data_input/reports` folder.
 To generate whitelists of required scaffolds please use following command.
 They will be generated using boundary for each sample.
 Boundaries should be added into `config`.
-The generated whitelists will be put in `data_input/whitelists` folder.
+The generated whitelists will be put in `data_input/[name of your reference]/whitelists` folder.
 
 `snakemake -pr --use-conda --cores 1 generate_whitelists`
+
+Scaffolds will appear on plot in order that they appear in the file.
+
+You could also add synonyms to scaffolds in the second column using Tab between columns.
+
+The upper directory is named by the reference for you to be able to change the order of scaffolds if you will mind to use another reference.
+
+# Run
+
+`snakemake --cores 8 --configfile config/default.yaml --forceall --use-conda --profile profile/slurm/ --printshellcmds --latency-wait 60`
+
+If you need to rerun plot step, for example if you added synonyms in whitelist.txt, then you should remove or rename somehow old results in `data_output/mavr/[name of your reference]` *.png and *.syn.tab files with the name of desired species.
