@@ -61,7 +61,7 @@ There are 2 yeast samples in `data_input/samples` folder for pipeline test. For 
 
 - `reference` specified as a _cerevisiae_
 
-- `species` for RepeatMasker specified as _saccharomyces_
+- `species` for RepeatMasker specified as _saccharomyces_ (The species name must be a valid NCBI Taxonomy Database species name and be contained in the RepeatMasker repeat database)
 
 - `boundary` for whitelist generation is set to _1000000_
 
