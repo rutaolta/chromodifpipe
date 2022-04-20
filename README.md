@@ -38,18 +38,18 @@ The generated reports will be put in `data_input/reports` folder.
 
 ### Generate whitelists
 
-To generate whitelists of required scaffolds please use following command. This step is required for alignament plot.
+To generate whitelists of scaffolds please use following command. This step is required for alignment plot.
 
-Whitelists will be generated using boundary for each sample.
+Whitelists would be generated for each sample using boundary.
 Boundaries should be added into `config/default.yaml` parameter `boundary`.
 
-The generated whitelists will be put in `data_input/[name of your reference]/whitelists` folder.
+The generated whitelists you can find in `data_input/[name of your reference]/whitelists` folder.
 
 `snakemake -pr --use-conda --cores 1 generate_whitelists`
 
-Scaffolds will appear on plot in order that they appear in the file.
+Scaffolds of sample will appear on plot in order that they appear in the <samplename>.whitelist.
 
-You could also add synonyms to scaffolds in the second column using Tab between columns.
+You could also add synonyms of scaffolds in the second column using Tab between columns.
 
 The upper directory is named by the reference for you to be able to change the order of scaffolds if you will mind to use another reference.
 
