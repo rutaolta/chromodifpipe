@@ -10,7 +10,6 @@ min_version("5.4.0")
 ##### setup config #####
 configfile: "config/default.yaml"
 
-reference_dir_path = Path(config["reference_dir"])
 samples_dir_path = Path(config["samples_dir"])
 samples_splitted_dir_path = Path(config["samples_splitted_dir"])
 whitelists_dir_path = Path(config["whitelists_dir"])
@@ -49,7 +48,7 @@ include: "workflow/rules/lastdbal.smk"
 include: "workflow/rules/plot.smk"
 
 ##### target rules #####
-localrules: all, create_sample_cluster_log_dirs, create_out_dirs, scaffold_length, generate_whitelists #, clean
+localrules: all, create_sample_cluster_log_dirs, create_out_dirs, scaffold_length, generate_whitelists
 ruleorder: create_sample_cluster_log_dirs > create_out_dirs > split_fasta
 
 rule all:
@@ -115,6 +114,4 @@ rule generate_whitelists:
     shell:
         "python workflow/scripts/seq_report.py -i {input} -o {output} -b {params.boundary} -t whitelist 2>&1"
 
-# rule clean:
-#     shell:
-#         "rm -rf data_output/trf data_output/splitted data_output/gff .snakemake"
+

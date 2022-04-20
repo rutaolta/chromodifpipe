@@ -3,17 +3,52 @@ from pandas import read_csv
 import argparse
 import subprocess
 
+
 def get_name_from_path(file_path):
     file_name = basename(file_path)
     index_of_dot = file_name.index('.')
     return file_name[:index_of_dot]
 
+
 def make_label_from_filename(filename):
     return filename.replace('_',' ').capitalize()
+
 
 def get_columns_from_file(file):
     df = read_csv(file, sep="\t", header=None)
     return ','.join(df[0]), file if len(df.columns) > 1 else None
+
+
+def plot(input, output, bottom_offset, left_offset, target_whitelist, query_whitelist, target_synonym, query_synonym, target_label, query_label):
+    target_order = target_whitelist
+    query_order = query_whitelist
+    if target_synonym is not None:
+        target_order = ','.join(read_csv(target_synonym, sep="\t", header=None)[1])
+    if query_synonym is not None:
+        query_order = ','.join(read_csv(query_synonym, sep="\t", header=None)[1])
+    cmd = f'''
+dotplot_from_last_tab.py 
+-i {input} 
+-o {output} 
+-w {target_whitelist} 
+-x {query_whitelist} 
+-u {target_order} 
+-z {query_order} 
+-l '{target_label}' 
+-r '{query_label}' 
+--bottom_offset {bottom_offset} 
+--left_offset {left_offset} 
+--axes_label_distance 3.6 
+--linewidth 0.5
+'''.replace('\n', '')
+
+    if query_synonym is not None:
+        cmd += f' -s {query_synonym} --query_syn_file_key_column 0 --query_syn_file_value_column 1'
+    if target_synonym is not None:
+        cmd += f' -y {target_synonym} --target_syn_file_key_column 0 --target_syn_file_value_column 1'
+
+    subprocess.run(cmd, shell=True)
+
 
 def prepare_plot(input_original, input_filtered, output, print_original, query_whitelist, target_whitelist):
     query_name = get_name_from_path(query_whitelist)
@@ -29,29 +64,6 @@ def prepare_plot(input_original, input_filtered, output, print_original, query_w
         plot(input_original, output+"/original_"+query_name, 0.15, 0.15, tscaffolds, qscaffolds, tsynonym_file, qsynonym_file, target_label, query_label)
 
 
-def plot(input, output, bottom_offset, left_offset, target_whitelist, query_whitelist, target_synonym, query_synonym, target_label, query_label):
-    cmd = f'''
-dotplot_from_last_tab.py 
--i {input} 
--o {output} 
--w {target_whitelist} 
--x {query_whitelist} 
--u {target_whitelist} 
--z {query_whitelist} 
--l '{target_label}' 
--r '{query_label}' 
---bottom_offset {bottom_offset} 
---left_offset {left_offset} 
---axes_label_distance 3.6 
---linewidth 0.5
-'''.replace('\n', '')
-
-    if query_synonym is not None:
-        cmd += f' -s {query_synonym} --query_syn_file_key_column 0 --query_syn_file_value_column 1'
-    if target_synonym is not None:
-        cmd += f' -y {target_synonym} --target_syn_file_key_column 0 --target_syn_file_value_column 1'
-
-    subprocess.run(cmd, shell=True)
 
 
 # parsing args
