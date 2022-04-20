@@ -69,15 +69,17 @@ There are 2 yeast samples in `data_input/samples` folder for pipeline test. For 
 
 - `plot_original` is _true_ to generate also plot without filtering
 
-To check the output you can run
+To check the output you can run:
 
 `snakemake --cores 8 --configfile config/default.yaml --use-conda --profile profile/slurm/ --printshellcmds --latency-wait 60`
 
-and find results in `data_input` folder
+and find results of test run in `data_input` folder
 
 # Run
 
 REMINDER: before run pipeline on your data your should specify settings in `config/default.yaml` corresponding to your samples. As an example you can have a look at test parameters above.
+  
+After all settings were specified you can run the pipeline with following command: 
 
 `snakemake --cores 8 --configfile config/default.yaml --use-conda --profile profile/slurm/ --printshellcmds --latency-wait 60`
 
