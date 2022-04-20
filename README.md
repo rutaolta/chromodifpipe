@@ -6,6 +6,15 @@ Obtained alignment could demonstrate interesting rearrangements on the chromosom
 
 The resulting plot of alignment you can find in `data_output` folder.
 
+Used tools:
+
+- ![RepeatMasker](https://www.repeatmasker.org/)
+- ![WindowMasker](https://github.com/goeckslab/WindowMasker)
+- ![TRF](https://tandem.bu.edu/trf/trf.html)
+- ![bedtools](https://bedtools.readthedocs.io/en/latest/)
+- ![LAST](https://gitlab.com/mcfrith/last)
+- ![MAVR](https://github.com/mahajrod/MAVR)
+
 ![alt text](https://github.com/rutaolta/chromodifpipe/blob/master/dag.png?raw=true)
 
 # Configure environment
