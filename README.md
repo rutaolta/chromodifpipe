@@ -6,6 +6,8 @@ Obtained alignment could demonstrate interesting rearrangements on the chromosom
 
 The resulting plot of alignment you can find in `data_output` folder.
 
+![alt text](https://github.com/rutaolta/chromodifpipe/blob/master/dag.png?raw=true)
+
 # Configure environment
 
 `git clone https://github.com/rutaolta/chromodifpipe.git`
