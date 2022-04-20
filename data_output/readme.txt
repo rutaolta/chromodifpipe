@@ -1,1 +1,1 @@
-dir for resulting files of whole pipeline. saved locally
+Here you can find overall results of the pipeline.
