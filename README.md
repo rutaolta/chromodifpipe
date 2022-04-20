@@ -55,7 +55,7 @@ The upper directory is named by the reference for you to be able to change the o
 
 ### Test
 
-There are 2 yeast samples in `data_input/samples` folder for pipeline test. For test data`config/default.yaml` modified as following:
+There are 2 yeast samples in `data_input/samples` folder for pipeline test. For test data `config/default.yaml` has been modified as following:
 
 - `samples_dir` defined as _data_input/samples_
 
