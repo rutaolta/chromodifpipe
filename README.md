@@ -85,6 +85,6 @@ After all settings were specified you can run the pipeline with following comman
 
 # Additional information
 
-Typically output plots with alignment should be filtered from "noise" that could interfere analysis. Filter boundary is set in `config/default.yaml` parameter `filter_range`. Moreover if non-filtered plots look good and you only need to redraw filtered plots, you can skip drawing plot with originals to speed up. If you set parameter `plot_original` to `false` the pipe will redraw only plots based on filtered data.
+Typically output plots with alignment should be filtered from "noise" that could interfere analysis results. Filter boundary could be defined in `config/default.yaml` parameter `filter_range`. Moreover if non-filtered plots look good and you only need to redraw filtered plots, you can skip drawing plot with originals to speed up. If you set parameter `plot_original` to `false` the pipe will redraw only plots based on filtered data.
 
-If you need to rerun plot step, for example if you added synonyms or changed the order of scaffolds/chromosomes in whitelist.txt, then you should remove or rename somehow old results for desired species in `data_output/mavr/filtered_[name of your reference].png`.
+And if you need to rerun plot step, for example if you added synonyms or changed the order of scaffolds/chromosomes in whitelist.txt, then you should remove or rename somehow following files with old results `data_output/mavr/filtered_[name of your reference].png`.
