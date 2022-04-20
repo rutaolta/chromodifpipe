@@ -2,21 +2,22 @@
 ### User settings should be specified in that block ###
 
 #---- Directory with sample files (.fasta) ----
-samples_dir: "data_input/samples"
+samples_dir: "data_input/samples" # directory with all samples in .fasta format
 
 #---- Species ----
-reference: "cerevisiae" #name of fasta without extension of reference species
-species: "saccharomyces" #"carnivora"
+reference: "cerevisiae" # fasta-file name reference species without extension
+species: "saccharomyces" # group of species for RepeatMasker. The species name must be a valid NCBI Taxonomy Database species name and be contained in the RepeatMasker repeat database (for example, "carnivora")
 
 #---- Whitelist settings ----
-boundary: 1000000 #min boundary for scaffold length
+boundary: 1000000 # min boundary for scaffold length
 
 #---- Plot settings ----
-filter_range: 1 #min length boundary for common sequence in .tab, for mammals recommended 5000
-plot_original: true #if true plot also based on unfiltered (original) .tab
+filter_range: 1 # min length boundary for common sequence in .tab, for mammals recommended 5000
+plot_original: true # if true plot also based on unfiltered (original) .tab
 
 ###              End of user settings               ###
 #######################################################
+
 
 
 #---- Dirs ----
@@ -91,3 +92,5 @@ lastdb_mem_mb: 50000
 lastal_mem_mb: 200000
 last_tar_mem_mb: 3000
 plot_last_tab_mem_mb: 50000
+
+
