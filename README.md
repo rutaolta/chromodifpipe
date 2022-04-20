@@ -31,7 +31,7 @@ Before running the pipeline you should add whitelist of scaffolds you are intere
 ### Scaffold length report
 
 To check scaffold length please use following command. 
-That can be useful for choosing scaffolds for whitelists.
+That can be useful when choosing scaffolds length boundary to generate whitelists.
 The generated reports will be put in `data_input/reports` folder.
 
 `snakemake -pr --use-conda --cores 1 scaffold_length`
