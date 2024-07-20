@@ -23,7 +23,7 @@ rule rm:
         species=config["species"],
         parallel=max([1, int(config["repeatmasker_threads"] / 4)])
     shell:
-        "RepeatMasker -species {params.species} -dir {out_rm_dir_path} {input} -parallel {params.parallel} -gff -xsmall >{log.std} 2>&1; "
+        'RepeatMasker -species "{params.species}" -dir {out_rm_dir_path} {input} -parallel {params.parallel} -gff -xsmall >{log.std} 2>&1; '
 
 rule rm_gff:
     input:
